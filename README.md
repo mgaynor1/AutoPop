@@ -11,7 +11,7 @@ R-based autopolyploid population and population genetic simulation.
 
 # Citations
 
-Gaynor ML, Kortessi N, Soltis DE, Soltis PS, and Ponciano JM. Formation, Establishment, and Persistence in Autopolyploid Populations. *In prep.*
+Gaynor ML, Kortessi N, Soltis DE, Soltis PS, and Ponciano JM. Formation, establishment, and persistence in autopolyploid populations. *In prep.*
 
 Gaynor ML, Soltis DE, Soltis PS, and Ponciano JM. Modeling the dynamics of multiple origins and gene flow in autopolyploids. *In prep.*
 
