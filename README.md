@@ -2,7 +2,7 @@
 
 <img align="right" src="AutoPopSymbol.png" width=150> 
 
-## Michelle L. Gaynor, Nicholas Kortessi, Douglas E. Soltis, Pamela S. Soltis, and José Miguel Ponciano  
+### Michelle L. Gaynor, Nicholas Kortessi, Douglas E. Soltis, Pamela S. Soltis, and José Miguel Ponciano  
 
 - [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 

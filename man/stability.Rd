@@ -26,5 +26,5 @@ Based on Ives et al. 2003, we calculate four stability  metrics based on the est
 B and the estimated variance-covariance matrix of environmental noise 'Sigma'.  These two quantities can be read from the output of the function \code{mars.cls()}.
 }
 \references{
-Ives, A. R., Dennis, B., Cottingham, K. L., Carpenter, S. R. (2003). Estimating community stability and ecological interactions frm time-series data. \emph{Ecological Monographs}, 72(2). doi: 10.1890/0012-9615(2003)073\link{0301:ECSAEI}2.0.CO;2
+Ives, A. R., Dennis, B., Cottingham, K. L., Carpenter, S. R. (2003). Estimating community stability and ecological interactions frm time-series data. \emph{Ecological Monographs}, 72(2): 301 - 330.
 }

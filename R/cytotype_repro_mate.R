@@ -14,21 +14,7 @@
 #'
 #' @return Output is a generation log including number of 2x offspring, 3x offspring, 4x offspring, gametes sampled per 2x individual, gametes sampled per 3x individual, and gametes sampled per 4x individual.
 #'
-#' @examples
-#' \donttest{
-#' extra.choosy <- cytotype_repro_mate(cgen = c(100,100,100),
-#'                                     b = 0.02,
-#'                                     cc = 0.052,
-#'                                     gnum.vec = c(10, 10, 10),
-#'                                     s = 0.02,
-#'                                     mc = 1)
-#' random.mating <- cytotype_repro_mate(cgen = c(100,100,100),
-#'                                      b = 0.02,
-#'                                      c = 0.052,
-#'                                      gnum.vec = c(10, 10, 10),
-#'                                      s = 0.02,
-#'                                      mc = 0)
-#'}
+#'
 #'
 #' @importFrom stats na.omit rpois rmultinom dhyper rbinom
 #'

@@ -27,23 +27,6 @@ This is a function to generate the number of offspring produced per generation.
 Assumes a mixed mating system where both selfing and outcrossing occur.
 Also allows group-based assortative mating (see Otto et al. 2008).
 }
-\examples{
-\donttest{
-extra.choosy <- cytotype_repro_mate(cgen = c(100,100,100),
-                                    b = 0.02,
-                                    cc = 0.052,
-                                    gnum.vec = c(10, 10, 10),
-                                    s = 0.02,
-                                    mc = 1)
-random.mating <- cytotype_repro_mate(cgen = c(100,100,100),
-                                     b = 0.02,
-                                     c = 0.052,
-                                     gnum.vec = c(10, 10, 10),
-                                     s = 0.02,
-                                     mc = 0)
-}
-
-}
 \references{
 Otto, S. P., Servedio, M. R., Nuismer, S. L. (2008). Frequency-dependent selection and the evolution of assortative mating. \emph{Genetics}, 179(4) 2091 - 2112. doi: 10.1534/genetics.107.084418
 }

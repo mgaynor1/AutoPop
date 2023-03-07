@@ -28,7 +28,10 @@ Also allows group-based assortative mating (see Otto et al. 2008)."><!-- mathjax
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/AdditionalMethods.html">Additional Methods</a>
+    <a class="dropdown-item" href="../articles/Introduction.html">Introduction to AutoPop</a>
+    <a class="dropdown-item" href="../articles/Maturation.html">Maturation</a>
+    <a class="dropdown-item" href="../articles/Reproduction.html">Reproduction</a>
+    <a class="dropdown-item" href="../articles/Survival.html">Survival</a>
   </div>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
@@ -94,33 +97,12 @@ Also allows group-based assortative mating (see Otto et al. 2008).</p>
     <p>Otto, S. P., Servedio, M. R., Nuismer, S. L. (2008). Frequency-dependent selection and the evolution of assortative mating. <em>Genetics</em>, 179(4) 2091 - 2112. doi: 10.1534/genetics.107.084418</p>
     </div>
 
-    <div class="section level2">
-    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
-<span class="r-in"><span><span class="va">extra.choosy</span> <span class="op">&lt;-</span> <span class="fu">cytotype_repro_mate</span><span class="op">(</span>cgen <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>,<span class="fl">100</span>,<span class="fl">100</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>                                    b <span class="op">=</span> <span class="fl">0.02</span>,</span></span>
-<span class="r-in"><span>                                    cc <span class="op">=</span> <span class="fl">0.052</span>,</span></span>
-<span class="r-in"><span>                                    gnum.vec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">10</span>, <span class="fl">10</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>                                    s <span class="op">=</span> <span class="fl">0.02</span>,</span></span>
-<span class="r-in"><span>                                    mc <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in cytotype_repro_mate(cgen = c(100, 100, 100), b = 0.02, cc = 0.052,     gnum.vec = c(10, 10, 10), s = 0.02, mc = 1):</span> could not find function "cytotype_repro_mate"</span>
-<span class="r-in"><span><span class="va">random.mating</span> <span class="op">&lt;-</span> <span class="fu">cytotype_repro_mate</span><span class="op">(</span>cgen <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>,<span class="fl">100</span>,<span class="fl">100</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>                                     b <span class="op">=</span> <span class="fl">0.02</span>,</span></span>
-<span class="r-in"><span>                                     c <span class="op">=</span> <span class="fl">0.052</span>,</span></span>
-<span class="r-in"><span>                                     gnum.vec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">10</span>, <span class="fl">10</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>                                     s <span class="op">=</span> <span class="fl">0.02</span>,</span></span>
-<span class="r-in"><span>                                     mc <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in cytotype_repro_mate(cgen = c(100, 100, 100), b = 0.02, c = 0.052,     gnum.vec = c(10, 10, 10), s = 0.02, mc = 0):</span> could not find function "cytotype_repro_mate"</span>
-<span class="r-in"><span><span class="co"># }</span></span></span>
-<span class="r-in"><span></span></span>
-</code></pre></div>
-    </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Michelle Gaynor.</p>
+  <p></p><p>Developed by Michelle L Gaynor.</p>
 </div>
 
 <div class="pkgdown-footer-right">

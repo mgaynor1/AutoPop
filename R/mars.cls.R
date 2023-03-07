@@ -31,7 +31,7 @@
 #'
 #'
 #' @references Ives, A. R., Dennis, B., Cottingham, K. L., Carpenter, S. R. (2003). Estimating community stability and ecological interactions from time-series data.
-#' \emph{Ecological Monographs}, 72(2). doi:10.1890/0012-9615(2003)073[0301:ECSAEI]2.0.CO;2
+#' \emph{Ecological Monographs}, 72(2): 301 - 330
 #'
 #'
 #'
