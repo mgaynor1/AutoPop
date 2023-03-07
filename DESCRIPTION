@@ -17,3 +17,4 @@ Suggests:
 Imports:
     MASS
 Config/testthat/edition: 3
+URL: http://mlgaynor.com/AutoPop/
