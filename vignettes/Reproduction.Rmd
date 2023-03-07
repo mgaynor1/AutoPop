@@ -1,0 +1,306 @@
+---
+title: "Reproduction"
+output:
+  html_document:
+    df_print: paged
+ 
+---
+
+
+Here we describe the parameters associated with reproduction. 
+
+**Table 1**: Summary of model parameters and definitions. Color indicates processes: reproduction (green), survival (red), and maturation (blue).
+
+| In-text | In-code |    Definition        | 
+|:--------:|:--------:|:-------------------------------------|
+|$\color{green}{\lambda_{i}}$  |$\color{green}{gnum.base}$   | Number of gametes produced by a mature individual     |         |
+|$\color{green}{d}$ | $\color{green}{d}$ |   	Strength of density dependence 	 |
+||$\color{green}{density.type}$ | Sets type of density dependency utilized when defining number of gametes per individual. Options: "all" or "like-cytotype" |  
+|$\color{green}{b}$    |$\color{green}{b}$ |Frequency of unreduced gamete formation |    
+|$\color{green}{v}$ |$\color{green}{cc}$  |Proportion of viable triploid gametes 		|
+|$\color{green}{s}$|$\color{green}{s}$ 	|Selfing rate      |
+|$\color{green}{mc}$ | $\color{green}{mc}$ |Strength of mating choice 	|
+                                                                                  
+                                                                                  
+                                                                                  
+## Gamete Formation                                                                   
+### Number of gametes per individual - $X_{i}$     
+The number of gametes per individual of each cytotype at each time step ($X_{i}$) is determined based on the base number of gametes per individual ($gnum.base$) and the strength of density dependency ($d$).   
+    
+$$X_{i} \sim {\rm Poisson} \left(gnum*\exp\left\{-d_{i}\sum_{i=2}^4\sum_{j=1}^{2}c_{i,j}(t)\right\} \right)$$
+
+
+where $c_{i,j}$ indicates the total number of individuals of each cytotype (i = \{2, 3, 4\}) and each life stage (j = \{1,2\}).  
+
+Here we inspect the number of gametes expected for populations between 10 to 100,000 individuals. We see that minimum population size where 0 gametes are sampled (indicated by colored lines) among the different $gnum.base$ values decreases with increased $d$ values. We also observe that at larger values of $d$ there is a decrease in distance among the minimum population size with 0 gametes sampled for the different $gnum.base$ values. Due to the dynamics revealed in **Figure 1**, we decided to vary the strength of density dependence, rather than the base number of gametes produced (see **Figure 2**).
+
+<br>
+
+```{r echo=FALSE, fig.height = 8, fig.width = 8, fig.align='center'}
+
+
+poploop <- seq(10, 100000, by = 50)
+
+d1 <- 0.00001
+d1out50 <- c()
+d1out100 <- c()
+d1out150 <- c()
+d1out200 <- c()
+for(i in 1:2000){
+  ithsize <- poploop[i]
+  d1out50[i] <- rpois(n = 1, lambda = (50*exp(-d1*(ithsize))))
+  d1out100[i] <- rpois(n = 1, lambda = (100*exp(-d1*(ithsize))))
+  d1out150[i] <- rpois(n = 1, lambda = (150*exp(-d1*(ithsize))))
+  d1out200[i] <- rpois(n = 1, lambda = (200*exp(-d1*(ithsize))))
+}
+
+d1_50plot <- data.frame(gsize= 50, popsize = poploop, out = d1out50)
+d1_100plot <- data.frame(gsize= 100, popsize = poploop, out = d1out100)
+d1_150plot <- data.frame(gsize= 150, popsize = poploop, out = d1out150)
+d1_200plot <- data.frame(gsize= 200, popsize = poploop, out = d1out200)
+
+de <- 0.00009
+deout50 <- c()
+deout100 <- c()
+deout150 <- c()
+deout200 <- c()
+for(i in 1:2000){
+  ithsize <- poploop[i]
+  deout50[i] <- rpois(n = 1, lambda = (50*exp(-de*(ithsize))))
+  deout100[i] <- rpois(n = 1, lambda = (100*exp(-de*(ithsize))))
+  deout150[i] <- rpois(n = 1, lambda = (150*exp(-de*(ithsize))))
+  deout200[i] <- rpois(n = 1, lambda = (200*exp(-de*(ithsize))))
+}
+
+de_50plot <- data.frame(gsize= 50, popsize = poploop, out = deout50)
+de_100plot <- data.frame(gsize= 100, popsize = poploop, out = deout100)
+de_150plot <- data.frame(gsize= 150, popsize = poploop, out = deout150)
+de_200plot <- data.frame(gsize= 200, popsize = poploop, out = deout200)
+
+
+d2 <- 0.0001
+d2out50 <- c()
+d2out100 <- c()
+d2out150 <- c()
+d2out200 <- c()
+for(i in 1:2000){
+  ithsize <- poploop[i]
+  d2out50[i] <- rpois(n = 1, lambda = (50*exp(-d2*(ithsize))))
+  d2out100[i] <- rpois(n = 1, lambda = (100*exp(-d2*(ithsize))))
+  d2out150[i] <- rpois(n = 1, lambda = (150*exp(-d2*(ithsize))))
+  d2out200[i] <- rpois(n = 1, lambda = (200*exp(-d2*(ithsize))))
+}
+
+d2_50plot <- data.frame(gsize= 50, popsize = poploop, out = d2out50)
+d2_100plot <- data.frame(gsize= 100, popsize = poploop, out = d2out100)
+d2_150plot <- data.frame(gsize= 150, popsize = poploop, out = d2out150)
+d2_200plot <- data.frame(gsize= 200, popsize = poploop, out = d2out200)
+
+de2 <- 0.0009
+de2out50 <- c()
+de2out100 <- c()
+de2out150 <- c()
+de2out200 <- c()
+for(i in 1:2000){
+  ithsize <- poploop[i]
+  de2out50[i] <- rpois(n = 1, lambda = (50*exp(-de2*(ithsize))))
+  de2out100[i] <- rpois(n = 1, lambda = (100*exp(-de2*(ithsize))))
+  de2out150[i] <- rpois(n = 1, lambda = (150*exp(-de2*(ithsize))))
+   de2out200[i] <- rpois(n = 1, lambda = (200*exp(-de2*(ithsize))))
+}
+
+de2_50plot <- data.frame(gsize= 50, popsize = poploop, out = de2out50)
+de2_100plot <- data.frame(gsize= 100, popsize = poploop, out = de2out100)
+de2_150plot <- data.frame(gsize= 150, popsize = poploop, out = de2out150)
+de2_200plot <- data.frame(gsize= 200, popsize = poploop, out = de2out200)
+
+d3 <- 0.001
+d3out50 <- c()
+d3out100 <- c()
+d3out150 <- c()
+d3out200 <- c()
+for(i in 1:2000){
+  ithsize <- poploop[i]
+  d3out50[i] <- rpois(n = 1, lambda = (50*exp(-d3*(ithsize))))
+  d3out100[i] <- rpois(n = 1, lambda = (100*exp(-d3*(ithsize))))
+  d3out150[i] <- rpois(n = 1, lambda = (150*exp(-d3*(ithsize))))
+  d3out200[i] <- rpois(n = 1, lambda = (200*exp(-d3*(ithsize))))
+}
+
+d3_50plot <- data.frame(gsize= 50, popsize = poploop, out = d3out50)
+d3_100plot <- data.frame(gsize= 100, popsize = poploop, out = d3out100)
+d3_150plot <- data.frame(gsize= 150, popsize = poploop, out = d3out150)
+d3_200plot <- data.frame(gsize= 200, popsize = poploop, out = d3out200)
+
+
+d2min50 <- min((d2_50plot[d2_50plot$out == 0, ])$popsize)
+d2min100 <- min((d2_100plot[d2_100plot$out == 0, ])$popsize)
+d2min150 <- min((d2_150plot[d2_150plot$out == 0, ])$popsize)
+d2min200 <- min((d2_200plot[d2_200plot$out == 0, ])$popsize)
+
+d3min50 <- min((d3_50plot[d3_50plot$out == 0, ])$popsize)
+d3min100 <- min((d3_100plot[d3_100plot$out == 0, ])$popsize)
+d3min150 <- min((d3_150plot[d3_150plot$out == 0, ])$popsize)
+d3min200 <- min((d3_200plot[d3_200plot$out == 0, ])$popsize)
+
+demin50 <- min((de_50plot[de_50plot$out == 0, ])$popsize)
+demin100 <- min((de_100plot[de_100plot$out == 0, ])$popsize)
+demin150 <- min((de_150plot[de_150plot$out == 0, ])$popsize)
+demin200 <- min((de_200plot[de_200plot$out == 0, ])$popsize)
+
+de2min50 <- min((de2_50plot[de2_50plot$out == 0, ])$popsize)
+de2min100 <- min((de2_100plot[de2_100plot$out == 0, ])$popsize)
+de2min150 <- min((de2_150plot[de2_150plot$out == 0, ])$popsize)
+de2min200 <- min((de2_200plot[de2_200plot$out == 0, ])$popsize)
+
+d2min <- c(d2min50, d2min100, d2min150, d2min200)
+demin <- c(demin50, demin100, demin150, demin200)
+d3min <- c(d3min50, d3min100, d3min150, d3min200)
+de2min <- c(de2min50, de2min100, de2min150, de2min200)
+
+difference <- c((sum(c((demin100 - demin50),(demin150 - demin100), (demin200 - demin150)))/3),
+                (sum(c((d2min100 - d2min50),(d2min150 - d2min100), (d2min200 - d2min150)))/3),
+                (sum(c((de2min100 - de2min50),(de2min150 - de2min100), (de2min200 - de2min150)))/3),
+                (sum(c((d3min100 - d3min50),(d3min150 - d3min100), (d3min200 - d3min150)))/3))
+
+                
+              
+minsum <- as.data.frame(rbind(demin, d2min, de2min, d3min))
+row.names(minsum) <- c(0.00009,  0.0001,  0.0009, 0.001)
+colnames(minsum) <-  c(50, 100, 150, 200)
+
+
+
+
+
+maxy <- (max(c(d1_50plot$out, d1_100plot$out, d1_150plot$out, d1_200plot$out,
+               d2_50plot$out, d2_100plot$out, d2_150plot$out, d2_200plot$out,
+               d3_50plot$out, d3_100plot$out, d3_150plot$out, d3_200plot$out,
+               de_50plot$out, de_100plot$out, de_150plot$out, de_200plot$out), 
+               de2_50plot$out, de2_100plot$out, de2_150plot$out, de2_200plot$out) + 30)
+
+par(mfrow = c(5, 1), mar=c(2,2,2,2))
+
+plot(x = d1_50plot$popsize, y = d1_50plot$out, col = "red", pch = 16,
+     xlab = "Population Size",  ylab = "Gametes Sampled", main="(B) d = 0.00001", xlim = c(0, 100050), ylim = c(0, maxy))
+points(x = d1_100plot$popsize, y = d1_100plot$out, col = "blue", pch = 16)
+points(x = d1_150plot$popsize, y = d1_150plot$out, col = "green", pch = 16)
+points(x = d1_200plot$popsize, y = d1_200plot$out, col = "black", pch = 16)
+legend("topright", legend=c(50, 100, 150, 200), pch=16, col=c("red", "blue", "green", "black"))
+
+plot(x = de_50plot$popsize, y = de_50plot$out, col = "red", pch = 16,
+     xlab = "Population Size",  ylab = "Gametes Sampled", main="(A) d = 0.00009", xlim = c(0, 100050), ylim = c(0, maxy))
+points(x = de_100plot$popsize, y = de_100plot$out, col = "blue", pch = 16)
+points(x = de_150plot$popsize, y = de_150plot$out, col = "green", pch = 16)
+points(x = de_200plot$popsize, y = de_200plot$out, col = "black", pch = 16)
+abline(v = demin50, col = "red", lwd = 1)
+abline(v = demin100, col = "blue", lwd = 1)
+abline(v = demin150, col = "green", lwd = 1)
+abline(v = demin200, col = "black", lwd = 1)
+legend("topright", legend=c(50, 100, 150, 200), pch=16, col=c("red", "blue", "green", "black"))
+
+plot(x = de2_50plot$popsize, y = de2_50plot$out, col = "red", pch = 16,
+     xlab = "Population Size",  ylab = "Gametes Sampled", main="(C) d = 0.0009", xlim = c(0, 100050), ylim = c(0, maxy))
+points(x = de2_100plot$popsize, y = de2_100plot$out, col = "blue", pch = 16)
+points(x = de2_150plot$popsize, y = de2_150plot$out, col = "green", pch = 16)
+points(x = de2_200plot$popsize, y = de2_200plot$out, col = "black", pch = 16)
+abline(v = de2min50, col = "red", lwd = 1)
+abline(v = de2min100, col = "blue", lwd = 1)
+abline(v = de2min150, col = "green", lwd = 1)
+abline(v = de2min200, col = "black", lwd = 1)
+legend("topright", legend=c(50, 100, 150, 200), pch=16, col=c("red", "blue", "green", "black"))
+
+plot(x = d2_50plot$popsize, y = d2_50plot$out, col = "red", pch = 16,
+     xlab = "Population Size",  ylab = "Gametes Sampled", main="(D) d = 0.0001", xlim = c(0, 100050), ylim = c(0, maxy))
+points(x = d2_100plot$popsize, y = d2_100plot$out, col = "blue", pch = 16)
+points(x = d2_150plot$popsize, y = d2_150plot$out, col = "green", pch = 16)
+points(x = d2_200plot$popsize, y = d2_200plot$out, col = "black", pch = 16)
+abline(v = d2min50, col = "red", lwd = 1)
+abline(v = d2min100, col = "blue", lwd = 1)
+abline(v = d2min150, col = "green", lwd = 1)
+abline(v = d2min200, col = "black", lwd = 1)
+legend("topright", legend=c(50, 100, 150, 200), pch=16, col=c("red", "blue", "green", "black"))
+
+
+
+plot(x = d3_50plot$popsize, y = d3_50plot$out, col = "red", pch = 16,
+     xlab = "Population Size",  ylab = "Gametes Sampled", main="(E) d = 0.001", xlim = c(0, 100050), ylim = c(0, maxy))
+points(x = d3_100plot$popsize, y = d3_100plot$out, col = "blue", pch = 16)
+points(x = d3_150plot$popsize, y = d3_150plot$out, col = "green", pch = 16)
+points(x = d3_200plot$popsize, y = d3_200plot$out, col = "black", pch = 16)
+abline(v = d3min50, col = "red", lwd = 1)
+abline(v = d3min100, col = "blue", lwd = 1)
+abline(v = d3min150, col = "green", lwd = 1)
+abline(v = d3min200, col = "black", lwd = 1)
+legend("topright", legend=c(50, 100, 150, 200), pch=16, col=c("red", "blue", "green", "black"))
+
+
+
+```
+**Figure 1**: Expected number of gametes sampled for d values (A - E) with color indicating gnum.base (or number of gametes produced by each individual). The color lines indicate the population size where 0 gametes sampled is first seen for each set gamete value.
+
+<br>
+
+
+```{r echo=FALSE, fig.align='center' }
+
+poploop <- seq(10, 100000, by = 50)
+
+
+d2 <-  0.0001
+d3 <-  0.0009
+d4 <-  0.0001
+d2out100 <- c()
+d3out100 <- c()
+d4out100 <- c()
+for(i in 1:2000){
+  ithsize <- poploop[i]
+  d2out100[i] <- rpois(n = 1, lambda = (100*exp(-d2*(ithsize))))
+  d3out100[i] <- rpois(n = 1, lambda = (100*exp(-d3*(ithsize))))
+  d4out100[i] <- rpois(n = 1, lambda = (100*exp(-d4*(ithsize))))
+}
+
+d2_100plot <- data.frame(gsize= 100, popsize = poploop, out = d2out100)
+d3_100plot <- data.frame(gsize= 100, popsize = poploop, out = d3out100)
+d4_100plot <- data.frame(gsize= 100, popsize = poploop, out = d4out100)
+
+maxy <- (max(c(d2_100plot$out, d3_100plot$out, d4_100plot$out)) + 30)
+plot(x = d2_100plot$popsize, y = d2_100plot$out, col = "#72DFFF", pch = 16,
+     xlab = "Population Size",  ylab = "Gametes Sampled", main="d2 = 0.0001, d3 = 0.0009, d4 = 0.0001 ", xlim = c(0, 100050), ylim = c(0, maxy))
+points(x = d3_100plot$popsize, y = d3_100plot$out, col = "#FF8800", pch = 16)
+points(x = d4_100plot$popsize, y = d4_100plot$out, col = "#798EF4", pch = 16)
+
+```
+**Figure 2**: Number of gametes sampled for diploids (blue), triploids (orange), and tetraploids (purple) when each d value (strength of density dependence) is specified for each cytotype, but gnum (or number of gametes produced by each individual) is set to 100 for each.
+
+<br>
+
+### Types of gametes produced    
+
+The current model allows all cytotypes to produce reduced and unreduced gametes at rates set by $b$ and $cc$ (or $v$). Of the gametes produced, not all are viable. Diploids produce 1n and 2n gametes, both of which are viable. Triploids only produce viable gametes of 3n, with unviable 1n and 2n gametes. Autotetraploids produce only viable 2n gametes. 
+
+
+
+```{r echo = FALSE, fig.align='center'}
+knitr::include_graphics("img/Reproduction01.jpg", dpi = 200)
+```
+**Figure 3**: Gametes produced by each cytotype. Here gam.vec indicates the $X_{i}$ at a time step, b is the rate of unreduced gamete formation,  v is the proportion triploid gametes that will be viable (cc), and $c_{i,j}$ is the total number of the ith cytotype that is reproductively mature (j=2) at time t. This figure is from Figure A1 in Gaynor et al. 2023.
+
+
+
+## Gamete mixing
+The remaining parameters are associated with selfing rate ($s$) and mating choice ($mc$). 
+
+
+```{r echo = FALSE, fig.align='center'}
+knitr::include_graphics("img/FigureS1.jpg", dpi = 200)
+```
+**Figure 4**: Figure A1 in Gaynor et al. 2023. This is a visual display of reproduction including gamete formation ($gam.vec$, $b$, and $v$) and the pairing of gametes via sexual or asexual reproduction ($s$ and $mc$). The number of gametes of each type is calculated based on the number of mature individuals of each cytotype ($c_{2,2}, c_{3,2}, c_{4,2}$), the number of gametes produced by each individual ($gam.vec$), the frequency of unreduced gamete formation ($b$), and the proportion triploid gametes that will be viable ($v$, or $cc$). After gamete formation, asexual reproduction via selfing will occur based on a defined selfing rate ($s$), the remaining gametes will outcross. Of these outcrossing gametes, a proportion will only pair with gametes produced by like-cytotypes indicated by mating choice ($mc$), the remainder will freely pair in a outcrossing pool.   
+
+
+
+### Lazy Mating
+Note, we included a parameter called 'mate.lazy' which can be equal to TRUE or FALSE. When FALSE, this prevents selfing from occurring during outcrossing. This increases computational time by 31x.
+
+
+

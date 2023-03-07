@@ -1,0 +1,66 @@
+---
+title: "Maturation"
+output:
+  html_document:
+    df_print: paged
+---
+
+
+Here we describe the single parameter associated with maturation.  
+
+**Table 1**: Summary of model parameters and definitions. Color indicates processes: reproduction (green), survival (red), and maturation (blue).
+   
+ | In-text | In-code |    Definition        | 
+|:--------:|:--------:|:-------------------------------------|
+|$\color{blue}{as.matur}$|$\color{blue}{as.matur}$	| Cytotype-specific maturation probability 	| 
+
+
+Maturation rate, $as.mature = c(M_{2}, M_{3}, M_{4})$, is the probability an immature will become reproductively mature. Each generation the number of immature individuals that become mature is sampled based on a binominal distribution with $c_{i,1}(t)$ trials and probability of success equal to $M_{i}$. As  maturation rate increases, the number of individuals that mature increases (**Figure 1**).
+
+
+
+```{r maturation, echo=FALSE, fig.align='center' }
+poploop <- seq(10, 100000, by = 50)
+
+mr1 <- 0.05
+mr1out <- c()
+mr2 <- 0.15
+mr2out <- c()
+mr3 <- 0.5
+mr3out <- c()
+mr4 <- 0.75
+mr4out <- c()
+mr5 <- 0.9
+mr5out <- c()
+
+for(i in 1:200){
+  mr1out[i] <- rbinom(n = 1, size = poploop[i], prob = mr1)
+  mr2out[i] <- rbinom(n = 1, size = poploop[i], prob = mr2)
+  mr3out[i] <- rbinom(n = 1, size = poploop[i], prob = mr3)
+  mr4out[i] <- rbinom(n = 1, size = poploop[i], prob = mr4)
+  mr5out[i] <- rbinom(n = 1, size = poploop[i], prob = mr5)
+}
+
+mr1_plot <- data.frame(popsize = poploop, out = mr1out)
+mr2_plot <- data.frame(popsize = poploop, out = mr2out)
+mr3_plot <- data.frame(popsize = poploop, out = mr3out)
+mr4_plot <- data.frame(popsize = poploop, out = mr4out)
+mr5_plot <- data.frame(popsize = poploop, out = mr5out)
+
+par(mfrow = c(5, 1), mar=c(2,2,2,2))
+plot(x = mr1_plot$popsize, y = mr1_plot$out, col = "red", pch = 16, type = "b",
+     xlab = "Population Size",  ylab = "Maturation", main="mr = 0.05", xlim = c(0, 100050), ylim = c(0, 10000))
+plot(x = mr2_plot$popsize, y = mr2_plot$out, col = "red", pch = 16, type = "b",
+     xlab = "Population Size",  ylab = "Maturation", main="mr = 0.15", xlim = c(0, 100050), ylim = c(0, 10000))
+plot(x = mr3_plot$popsize, y = mr3_plot$out, col = "red", pch = 16, type = "b",
+     xlab = "Population Size",  ylab = "Maturation", main="mr = 0.50", xlim = c(0, 100050), ylim = c(0, 10000))
+plot(x = mr4_plot$popsize, y = mr4_plot$out, col = "red", pch = 16, type = "b",
+     xlab = "Population Size", ylab = "Maturation", main="mr = 0.75", xlim = c(0, 100050), ylim = c(0, 10000))
+plot(x = mr5_plot$popsize, y = mr5_plot$out, col = "red", pch = 16, type = "b",
+     xlab = "Population Size", ylab = "Maturation", main="mr = 0.90", xlim = c(0, 100050), ylim = c(0, 10000))
+
+```
+**Figure 1**: Expected number of individuals to mature when we sample a binomial distribution based on the the maturation probability.
+
+
+
