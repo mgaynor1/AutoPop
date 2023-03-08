@@ -2,22 +2,26 @@
 % Please edit documentation in R/matrix_cytotype_repro_mate.R
 \name{matrix_cytotype_repro_mate}
 \alias{matrix_cytotype_repro_mate}
-\title{Reproduction function}
+\title{Lazy reproduction function.}
 \usage{
 matrix_cytotype_repro_mate(cgen, b, cc, gnum.vec, s, mc)
 }
 \arguments{
-\item{cgen}{Number of mature individuals of each cytotype in the current generation.}
+\item{cgen}{Number of mature individuals of each cytotype in the current generation.
+Must be a list of three numeric values. For example, \code{cgen = c(100, 100, 100)}.}
 
-\item{b}{Proportion of unreduced gamete formed by each diploid and tetraploid individual.}
+\item{b}{Proportion of unreduced gamete formed by each diploid and tetraploid individual.
+Must be a single integer between 0 and 1.}
 
-\item{cc}{Proportion of 3n gamete formation from each triploid individual.}
+\item{cc}{Proportion of 3n gamete formation from each triploid individual.
+Must be a single integer between 0 and 1.}
 
-\item{gnum.vec}{The mean number of gametes produced by each individual (cytotype-specific).}
+\item{gnum.vec}{The mean number of gametes produced by each individual for each cytotype.
+Must be a list of three numeric values. For example, \code{gnum.vec = c(100, 100, 100)}.}
 
-\item{s}{Selfing rate.}
+\item{s}{Selfing rate. Must be a single integer between 0 and 1.}
 
-\item{mc}{Strength of mating choice.}
+\item{mc}{Strength of mating choice. Must be a single integer between 0 and 1.}
 }
 \value{
 Output is a generation log including number of 2x offspring, 3x offspring, 4x offspring, gametes sampled per 2x individual, gametes sampled per 3x individual, and gametes sampled per 4x individual.

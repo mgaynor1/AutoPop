@@ -7,7 +7,10 @@ output:
 ---
 
 
-Here we describe the parameters associated with reproduction. 
+Here we describe the parameters associated with reproduction and how these parameters may influence our model. We can split reproduction into two parts: 
+
+  1. Gamete formation 
+  2. Gamete mixing
 
 **Table 1**: Summary of model parameters and definitions. Color indicates processes: reproduction (green), survival (red), and maturation (blue).
 
@@ -24,7 +27,7 @@ Here we describe the parameters associated with reproduction.
                                                                                   
                                                                                   
 ## Gamete Formation                                                                   
-### Number of gametes per individual - $X_{i}$     
+### Number of gametes per individual    
 The number of gametes per individual of each cytotype at each time step ($X_{i}$) is determined based on the base number of gametes per individual ($gnum.base$) and the strength of density dependency ($d$).   
     
 $$X_{i} \sim {\rm Poisson} \left(gnum*\exp\left\{-d_{i}\sum_{i=2}^4\sum_{j=1}^{2}c_{i,j}(t)\right\} \right)$$

@@ -2,7 +2,7 @@
 % Please edit documentation in R/stability.R
 \name{stability}
 \alias{stability}
-\title{Stability metrics calculator following Ives et al. 2003}
+\title{Ives et al. 2003 stability metrics calculator.}
 \usage{
 stability(B, sigma)
 }
@@ -13,7 +13,7 @@ This can be calculated with the \code{mars.cls()} function.}
 \item{sigma}{Matrix of p x p, environmental noise variance-covariance matrix. This can be calculated with the \code{mars.cls()} function.}
 }
 \value{
-Resulting list which includes:
+Resulting list includes:
 \itemize{
 \item \strong{var.prop}, at stationarity the var.prop is the variance proportion attributable to environmental noise. The smaller the values, the more stable the dynamics.
 \item \strong{mean.return.time} & \strong{var.return.time}, rate at which the transition distribution converges back to the stationary distribution. The less time it takes to return to the stationary distribution, the more stable the population.

@@ -1,14 +1,14 @@
-#' Processing function
+#' Processing function to subset a single replicate from a model set.
 #'
 #' @description Subset a single replicate from every model set.
 #'
-#' @param set List of models
-#' @param setname
+#' @param set List containing paths to simulations wth replicates. This can be made with the function `list.files(path = "", full.names = TRUE)`.
+#' @param setname Name for output folder.
 #'
-#' @returns `write_one_rep()` creates a folder "output/one_rep/{setname}" where a csv file for each replicate is made.
+#' @returns `write.one.rep()` creates a folder "output/one_rep/{setname}" where a csv file for each replicate is made.
 
 
-write_one_rep <- function(set, setname) {
+write.one.rep <- function(set, setname) {
 
    # Check if output directory exists
   outputdirectory <- paste0("output/one_rep/", setname)

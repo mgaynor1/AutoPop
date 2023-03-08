@@ -1,16 +1,17 @@
-#' Mature survival calculation.
+#' Mature survival -  Calculates probability of mature survival.
 #'
-#' @description Calculates the probability of mature survival based on a beta binomial distribution.
+#' @description Calculates the probability of mature survival based
+#' on a beta binomial distribution.
 #'
 #'
-#' @param as.msurv Mean probability of mature survival (list).
-#' @param  env.ci Proportion of environmental variance used to define mature survival rate per generation
-#'   with a beta distribution. This number must be in between 0 and 1, but cannot be equal to 0 or 1.
+#' @param as.msurv Mean probability of mature survival. Must be a single integer between 0 and 1.
+#' @param  env.ci Proportion of environmental variance used to define mature survival rate per generation.
+#'   Must be an integer greater than or equal to 0 and less than 1.
 #'
 #' @returns Probability of mature survival.
 #'
 #' @importFrom stats na.omit rbeta
-
+#'
 
 
 mature.surv.calc <- function(env.ci, as.msurv){

@@ -2,7 +2,7 @@
 % Please edit documentation in R/mars.cls.R
 \name{mars.cls}
 \alias{mars.cls}
-\title{MAR(1) Conditional least squares parameter estimates}
+\title{MAR(1) Conditional least squares parameter estimates.}
 \usage{
 mars.cls(comm.mat, covariate = NULL)
 }

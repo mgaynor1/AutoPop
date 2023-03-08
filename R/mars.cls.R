@@ -1,4 +1,4 @@
-#' MAR(1) Conditional least squares parameter estimates
+#' MAR(1) Conditional least squares parameter estimates.
 #'
 #' @description  As described in  Ives et al. 2003, the Multivariate Autoregressive Model, also known as the MAR(1) model,
 #'    is a discrete-time model for a multispecies stochastic community subject to environmental noise.  It is a Markov process.

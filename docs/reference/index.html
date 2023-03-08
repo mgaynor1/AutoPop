@@ -24,10 +24,10 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/01-Reproduction.html">Reproduction</a>
+    <a class="dropdown-item" href="../articles/02-Survival.html">Survival</a>
+    <a class="dropdown-item" href="../articles/03-Maturation.html">Maturation</a>
     <a class="dropdown-item" href="../articles/Introduction.html">Introduction to AutoPop</a>
-    <a class="dropdown-item" href="../articles/Maturation.html">Maturation</a>
-    <a class="dropdown-item" href="../articles/Reproduction.html">Reproduction</a>
-    <a class="dropdown-item" href="../articles/Survival.html">Survival</a>
   </div>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
@@ -44,9 +44,9 @@
     </div>
 
     <div class="section level2">
-      <h2 id="all-functions">All functions<a class="anchor" aria-label="anchor" href="#all-functions"></a></h2>
+      <h2 id="simulating-data-with-autopop">Simulating data with AutoPop<a class="anchor" aria-label="anchor" href="#simulating-data-with-autopop"></a></h2>
       
-      
+      <p class="section-desc"></p><p>Wrapper functions to simulate a single time step or multiple generations.</p>
 
       
     </div><div id="" class="section level2">
@@ -56,66 +56,89 @@
 
       <dl><dt>
           
-          <code><a href="alphabeta.calc.html">alphabeta.calc()</a></code> 
+          <code><a href="one.iter.f.choosy.html">one.iter.f.choosy()</a></code> 
         </dt>
-        <dd>Mature survival alpha and beta calculation.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="cytotype_repro_mate.html">cytotype_repro_mate()</a></code> 
-        </dt>
-        <dd>Reproduction function</dd>
-      </dl><dl><dt>
-          
-          <code><a href="format.iter.html">format(<i>&lt;iter&gt;</i>)</a></code> 
-        </dt>
-        <dd>Format iteration output</dd>
+        <dd>Simulate a single generation.</dd>
       </dl><dl><dt>
           
           <code><a href="gen.iter.f.choosy.html">gen.iter.f.choosy()</a></code> 
         </dt>
-        <dd>Simulate multiple generations</dd>
+        <dd>Simulate multiple generations.</dd>
+      </dl></div><div class="section level2">
+      <h2 id="post-simulation-analysis">Post-Simulation Analysis<a class="anchor" aria-label="anchor" href="#post-simulation-analysis"></a></h2>
+      
+      <p class="section-desc"></p><p>Functions for understanding model outputs.</p>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="write.one.rep.html">write.one.rep()</a></code> 
+        </dt>
+        <dd>Processing function to subset a single replicate from a model set.</dd>
       </dl><dl><dt>
           
           <code><a href="mars.cls.html">mars.cls()</a></code> 
         </dt>
-        <dd>MAR(1) Conditional least squares parameter estimates</dd>
-      </dl><dl><dt>
-          
-          <code><a href="matrix_cytotype_repro_mate.html">matrix_cytotype_repro_mate()</a></code> 
-        </dt>
-        <dd>Reproduction function</dd>
-      </dl><dl><dt>
-          
-          <code><a href="mature.surv.calc.html">mature.surv.calc()</a></code> 
-        </dt>
-        <dd>Mature survival calculation.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="muvar.calc.html">muvar.calc()</a></code> 
-        </dt>
-        <dd>Mature survival helper calculation.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="one.iter.f.choosy.html">one.iter.f.choosy()</a></code> 
-        </dt>
-        <dd>Simulate a single generation</dd>
+        <dd>MAR(1) Conditional least squares parameter estimates.</dd>
       </dl><dl><dt>
           
           <code><a href="stability.html">stability()</a></code> 
         </dt>
-        <dd>Stability metrics calculator following Ives et al. 2003</dd>
+        <dd>Ives et al. 2003 stability metrics calculator.</dd>
+      </dl></div><div class="section level2">
+      <h2 id="everything-else">Everything Else<a class="anchor" aria-label="anchor" href="#everything-else"></a></h2>
+      
+      <p class="section-desc"></p><p>Functions used to simulate data.</p>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="cytotype_repro_mate.html">cytotype_repro_mate()</a></code> 
+        </dt>
+        <dd>Reproduction function.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="matrix_cytotype_repro_mate.html">matrix_cytotype_repro_mate()</a></code> 
+        </dt>
+        <dd>Lazy reproduction function.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="mature.surv.calc.html">mature.surv.calc()</a></code> 
+        </dt>
+        <dd>Mature survival -  Calculates probability of mature survival.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="alphabeta.calc.html">alphabeta.calc()</a></code> 
+        </dt>
+        <dd>Mature survival - Calculates alpha and beta from mean and variance.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="muvar.calc.html">muvar.calc()</a></code> 
+        </dt>
+        <dd>Mature survival - Calculates mean and variance from alpha and beta.</dd>
       </dl><dl><dt>
           
           <code><a href="var.option.html">var.option()</a></code> 
         </dt>
-        <dd>Mature survival variance calculation.</dd>
+        <dd>Mature survival - Calculate variance from env.ci and mu.</dd>
       </dl><dl><dt>
           
-          <code><a href="write_one_rep.html">write_one_rep()</a></code> 
+          <code><a href="form.autopop.html">form.autopop()</a></code> 
         </dt>
-        <dd>Processing function</dd>
+        <dd>Format multiple generation simulation.</dd>
       </dl></div>
-  </main></div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside></div>
 
 
     <footer><div class="pkgdown-footer-left">

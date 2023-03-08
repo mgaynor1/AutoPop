@@ -1,4 +1,4 @@
-#' Stability metrics calculator following Ives et al. 2003
+#' Ives et al. 2003 stability metrics calculator.
 #'
 #' @description  Based on Ives et al. 2003, we calculate four stability  metrics based on the estimates of the matrix of ecological interactions
 #' B and the estimated variance-covariance matrix of environmental noise 'Sigma'.  These two quantities can be read from the output of the function `mars.cls()`.
@@ -7,7 +7,7 @@
 #'   This can be calculated with the `mars.cls()` function.
 #' @param sigma Matrix of p x p, environmental noise variance-covariance matrix. This can be calculated with the `mars.cls()` function.
 #'
-#' @returns Resulting list which includes:
+#' @returns Resulting list includes:
 #' * \strong{var.prop}, at stationarity the var.prop is the variance proportion attributable to environmental noise. The smaller the values, the more stable the dynamics.
 #' * \strong{mean.return.time} & \strong{var.return.time}, rate at which the transition distribution converges back to the stationary distribution. The less time it takes to return to the stationary distribution, the more stable the population.
 #' * \strong{reactivity}, measures reaction to perturbations or the distance away from stationary a system moves in response to a disturbance. Again, smaller is better in terms of stability.

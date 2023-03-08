@@ -2,14 +2,14 @@
 % Please edit documentation in R/alphabeta.calc.R
 \name{alphabeta.calc}
 \alias{alphabeta.calc}
-\title{Mature survival alpha and beta calculation.}
+\title{Mature survival - Calculates alpha and beta from mean and variance.}
 \usage{
 alphabeta.calc(mu, var)
 }
 \arguments{
-\item{mu}{Mean probability of mature survival (list).}
+\item{mu}{Mean probability of mature survival. Must be a single integer between 0 and 1.}
 
-\item{var}{Derived variance based on var.option.}
+\item{var}{Derived variance based on var.option. Must be a single integer between 0 and 1.}
 }
 \value{
 List with the parameters alpha and beta.

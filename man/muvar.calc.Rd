@@ -2,7 +2,7 @@
 % Please edit documentation in R/muvar.calc.R
 \name{muvar.calc}
 \alias{muvar.calc}
-\title{Mature survival helper calculation.}
+\title{Mature survival - Calculates mean and variance from alpha and beta.}
 \usage{
 muvar.calc(alpha, beta)
 }

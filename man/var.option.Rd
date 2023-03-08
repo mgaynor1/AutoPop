@@ -2,7 +2,7 @@
 % Please edit documentation in R/var.option.R
 \name{var.option}
 \alias{var.option}
-\title{Mature survival variance calculation.}
+\title{Mature survival - Calculate variance from env.ci and mu.}
 \usage{
 var.option(env.ci, mu)
 }
@@ -17,4 +17,7 @@ Calculated variance.
 }
 \description{
 Calculates variance based on env.ci, the proportion of env. variance, and mu, the mean probability of mature survival.
+}
+\examples{
+variance <- var.option(env.ci = 0.9, mu = 0.6)
 }

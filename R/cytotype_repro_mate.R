@@ -1,18 +1,24 @@
-#' Reproduction function
+#' Reproduction function.
 #'
 #' @description This is a function to generate the number of offspring produced per generation.
 #'   Assumes a mixed mating system where both selfing and outcrossing occur.
 #'   Also allows group-based assortative mating (see Otto et al. 2008).
+#'   This function prevents selfing from occurring during outcrossing.
 #'
 #'
 #' @param cgen Number of mature individuals of each cytotype in the current generation.
+#'   Must be a list of three numeric values. For example, `cgen = c(100, 100, 100)`.
 #' @param b Proportion of unreduced gamete formed by each diploid and tetraploid individual.
+#'    Must be a single integer between 0 and 1.
 #' @param cc Proportion of 3n gamete formation from each triploid individual.
-#' @param gnum.vec The mean number of gametes produced by each individual (cytotype-specific).
-#' @param s Selfing rate.
-#' @param mc Strength of mating choice.
+#'   Must be a single integer between 0 and 1.
+#' @param gnum.vec The mean number of gametes produced by each individual for each cytotype.
+#'   Must be a list of three numeric values. For example, `gnum.vec = c(100, 100, 100)`.
+#' @param s Selfing rate. Must be a single integer between 0 and 1.
+#' @param mc Strength of mating choice. Must be a single integer between 0 and 1.
 #'
-#' @return Output is a generation log including number of 2x offspring, 3x offspring, 4x offspring, gametes sampled per 2x individual, gametes sampled per 3x individual, and gametes sampled per 4x individual.
+#' @return Output is a generation log including number of 2x offspring, 3x offspring, 4x offspring, gametes sampled per 2x individual, gametes sampled per 3x individual,
+#' and gametes sampled per 4x individual.
 #'
 #'
 #'

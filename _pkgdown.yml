@@ -2,3 +2,27 @@ url: http://mlgaynor.com/AutoPop/
 template:
   bootstrap: 5
 
+reference:
+- title: Simulating data with AutoPop
+  desc: |
+    Wrapper functions to simulate a single time step or multiple generations.
+  contents:
+  - one.iter.f.choosy
+  - gen.iter.f.choosy
+- title: Post-Simulation Analysis
+  desc: Functions for understanding model outputs.
+  contents:
+  - write.one.rep
+  - mars.cls
+  - stability
+- title: Everything Else
+  desc: Functions used to simulate data.
+  contents:
+  - cytotype_repro_mate
+  - matrix_cytotype_repro_mate
+  - mature.surv.calc
+  - alphabeta.calc
+  - muvar.calc
+  - var.option
+  - form.autopop
+

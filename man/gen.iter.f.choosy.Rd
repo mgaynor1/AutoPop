@@ -2,7 +2,7 @@
 % Please edit documentation in R/gen.iter.f.choosy.R
 \name{gen.iter.f.choosy}
 \alias{gen.iter.f.choosy}
-\title{Simulate multiple generations}
+\title{Simulate multiple generations.}
 \usage{
 gen.iter.f.choosy(
   generations,
@@ -22,47 +22,70 @@ gen.iter.f.choosy(
 )
 }
 \arguments{
-\item{generations}{Number of generations to iterate.}
+\item{generations}{Number of generations to simulate. Must be a numeric value.}
 
-\item{init.pop}{Initial population size, ie. number of mature diploids in founding population.}
+\item{init.pop}{The number of mature diploids in the initial founding population. Must be a numeric value greater than 0.}
 
-\item{env.ci}{Proportion of environmental variance used to define mature survival rate per generation
-with a normal distribution where the mean is the previous generations maturation rate.}
+\item{env.ci}{Proportion of environmental variance used to define mature survival rate per generation.
+Must be an integer greater than or equal to 0 and less than 1.}
 
-\item{aii.vec}{The probability of an immature individual surviving (cytotype-specific).}
+\item{aii.vec}{The survival probability of an immature individual for each cytotype. Must be a list of three integers between 0 and 1. For example, \code{aii.vec = c(0.5, 0.3, 0.5)}.}
 
-\item{as.matur}{Probability of maturation from immature to mature stage (list).}
+\item{as.matur}{The probability of maturation from an immature stage to the mature stage for each cytotype. Must be a list of three integers between 0 and 1. For example, \code{as.matur = c(0.5, 0.3, 0.5)}.}
 
-\item{as.msurv}{probability of mature survival (list).}
+\item{as.msurv}{The mean survival probability of a mature individual for each cytotype.
+Must be a list of three integers between 0 and 1. For example, \code{as.msurv = c(0.5, 0.3, 0.5)}.}
 
-\item{d}{Strength of density dependency on gamete production.}
+\item{d}{Strength of density dependency on gamete production for each cytotype. Must be a list of three integers between 0 and 1. For example, \code{d = c(0.001, 0.009, 0.001)}.}
 
-\item{gnum.base}{List of three numeric values, represent the base level mean
-number of gametes per individual per cytotype. We defined gametes per
-generation by a poisson distribution where lambda is equal to the this value
-times the exponential of the product of strength of density dependency (ie. d)
-and the sum of all individuals at time t or all individuals of a certain cytotype
-at time t. Sum type is set by density type.}
+\item{gnum.base}{Mean number of gametes per individual per cytotype. Must be a list of three numeric values. For example, \code{gnum.base = c(100, 100, 100)}.}
 
-\item{b}{Proportion of unreduced gamete formed by each diploid and tetraploid individual.}
+\item{b}{Proportion of unreduced gamete formed by each diploid and tetraploid individual.
+Must be a single integer between 0 and 1.}
 
-\item{cc}{Proportion of 3n gamete formation from each triploid individual.}
+\item{cc}{Proportion of 3n gamete formation from each triploid individual.
+Must be a single integer between 0 and 1.}
 
-\item{s}{Selfing rate.}
+\item{s}{Selfing rate. Must be a single integer between 0 and 1.}
 
-\item{mc}{Strength of mating choice.}
+\item{mc}{Strength of mating choice. Must be a single integer between 0 and 1.}
 
-\item{density.type}{"all" sets gamete per generation sum as the sum of all
-individuals at time t. "like-cytotype" sets gamete per generation sum as
-the sum of both immature and mature individuals of the cytotype at time t.
-Defaults to "all".}
+\item{density.type}{Default = "all", this sets the density at time t as all individuals at time t.
+Alternatively, "like-cytotype" sets the density at time t for each cytotype based on only the total immature and mature individuals
+of that cytotype at time t.}
 
-\item{mate.lazy}{Set to be FALSE, unless set to TRUE. FALSE prevents selfing from occurring during outcrossing. However, this increases the computational time by 31x!}
+\item{mate.lazy}{Default = FALSE, this prevents selfing from occurring during outcrossing. However, this increases the computational time by 31x!}
 }
 \value{
-A single data frame as defined by \code{format.iter()}.
+A single data frame as defined by \code{form.autopop()}. Each row is a generation. The columns are as follows,
+\itemize{
+\item V1: number of immature diploids.
+\item V2: number of immature triploids.
+\item V3: number of immature tetraploids.
+\item V4: number of mature diploids.
+\item V5: number of mature triploids.
+\item V6: number of mature tetraploids.
+\item V7: number of diploid offspring produced during t - 1.
+\item V8: number of triploid offspring produced during t - 1.
+\item V9: number of tetraploid offspring produced during t - 1.
+\item V10: number of gametes per diploid individual at t - 1.
+\item V11: number of gametes per triploid individual at t - 1.
+\item V12: number of gametes per tetraploid individual at t - 1.
+\item gen: generation.
+\item sum: total number of individuals.
+\item sum2x-sum4x: total number of each cytotype at that generation.
+\item V1a:V6a: relative abundance of V1:V6 in that generation.
+\item C2: relative abundance of all diploids (ie. sum2x/sum).
+\item C3: relative abundance of all triploids (ie. sum3x/sum).
+\item C4: relative abundance of all tetraploids (ie. sum4x/sum)
+}
 }
 \description{
-This is a function that loops through a set number of generations
-to look at population dynamics overtime.
+Defined in detail in \url{Gaynor et al. 2023}. To summarize,
+this function simulates a stochastic stage-structured
+matrix population dynamics model for diploid, triploid, and autotetraploid
+perennial plants with overlapping generations and two life-stages (reproductively immature and reproductively mature).
+Population composition at time t + 1 is defined by reproduction,
+survival, and maturation. This is a function that loops through a set number of generations.
+Note, lists of three should always have values representing \code{c(diploids, triploid, autotetraploids)}.
 }
