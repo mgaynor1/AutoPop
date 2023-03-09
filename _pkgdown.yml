@@ -37,6 +37,9 @@ articles:
   - Survival
   - Maturation
 navbar:
-    structure:
-      left: [reference, articles]
-      right: [search]
+  structure:
+    left:
+    - reference
+    - articles
+    right: search
+
