@@ -1,7 +1,8 @@
 url: http://mlgaynor.com/AutoPop/
 template:
   bootstrap: 5
-
+development:
+  mode: auto
 reference:
 - title: Simulating data with AutoPop
   desc: |
@@ -17,7 +18,7 @@ reference:
   - mars.cls
   - stability
 - title: Everything Else
-  desc:  |
+  desc: |
     Functions used within our stochastic model.
   contents:
   - cytotype_repro_mate
@@ -27,7 +28,6 @@ reference:
   - muvar.calc
   - var.option
   - form.autopop
-
 articles:
 - title: AutoPop
   navbar: ~
