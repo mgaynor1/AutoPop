@@ -26,3 +26,12 @@ reference:
   - var.option
   - form.autopop
 
+articles:
+- title: AutoPop
+  navbar: ~
+  contents:
+  - Introduction
+  - Reproduction
+  - Survival
+  - Maturation
+

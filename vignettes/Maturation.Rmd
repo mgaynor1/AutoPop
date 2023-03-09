@@ -8,7 +8,7 @@ output:
 
 Here we describe the single parameter associated with maturation.  
 
-**Table 1**: Summary of model parameters and definitions. Color indicates processes: reproduction (green), survival (red), and maturation (blue).
+**Table 1**: Summary of model parameters associated with maturation.
    
  | In-text | In-code |    Definition        | 
 |:--------:|:--------:|:-------------------------------------|
@@ -19,7 +19,7 @@ Maturation rate, $as.mature = c(M_{2}, M_{3}, M_{4})$, is the probability an imm
 
 
 
-```{r maturation, echo=FALSE, fig.align='center' }
+```{r maturation, echo=FALSE, fig.align='center', fig.height = 10, fig.width = 8 }
 poploop <- seq(10, 100000, by = 50)
 
 mr1 <- 0.05

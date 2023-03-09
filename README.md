@@ -1,10 +1,13 @@
 # AutoPop
 
-<img align="right" src="AutoPopSymbol.png" width=150> 
 
-#### Michelle L. Gaynor, Nicholas Kortessi, Douglas E. Soltis, Pamela S. Soltis, and José Miguel Ponciano  
+<img src="man/figures/AutoPopSymbol.png" align="right" width=200 />
 
-- [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
+**Michelle L. Gaynor, Nicholas Kortessi, Douglas E. Soltis, Pamela S. Soltis, and José Miguel Ponciano**  
+
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)  
+
 
 ## Introduction   
 
@@ -17,7 +20,7 @@ install.packages(devtools)
 devtools::install_github("mgaynor1/AutoPop")
 ```
 
-## Citations
+## References
 
 Gaynor ML, Kortessis N, Soltis DE, Soltis PS, and Ponciano JM. 2023. Joint dynamics of mixed-ploidy populations under demographic and environmental stochasticity. *In prep.*
 

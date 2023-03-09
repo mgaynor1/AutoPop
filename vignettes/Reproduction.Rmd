@@ -3,22 +3,24 @@ title: "Reproduction"
 output:
   html_document:
     df_print: paged
- 
+resource_files:
+  - vignettes/img/FigureS1.jpg
+  - vignettes/img/Reproduction01.jpg
 ---
 
 
 Here we describe the parameters associated with reproduction and how these parameters may influence our model. We can split reproduction into two parts: 
 
-  1. Gamete formation 
-  2. Gamete mixing
+  1. Gamete Formation 
+  2. Gamete Mixing 
 
-**Table 1**: Summary of model parameters and definitions. Color indicates processes: reproduction (green), survival (red), and maturation (blue).
+**Table 1**: Summary of  model parameters associated with reproduction. 
 
 | In-text | In-code |    Definition        | 
 |:--------:|:--------:|:-------------------------------------|
 |$\color{green}{\lambda_{i}}$  |$\color{green}{gnum.base}$   | Number of gametes produced by a mature individual     |         |
 |$\color{green}{d}$ | $\color{green}{d}$ |   	Strength of density dependence 	 |
-||$\color{green}{density.type}$ | Sets type of density dependency utilized when defining number of gametes per individual. Options: "all" or "like-cytotype" |  
+||$\color{green}{density.type}$ | Type of density dependency Options: "all" or "like-cytotype" |  
 |$\color{green}{b}$    |$\color{green}{b}$ |Frequency of unreduced gamete formation |    
 |$\color{green}{v}$ |$\color{green}{cc}$  |Proportion of viable triploid gametes 		|
 |$\color{green}{s}$|$\color{green}{s}$ 	|Selfing rate      |
@@ -27,7 +29,7 @@ Here we describe the parameters associated with reproduction and how these param
                                                                                   
                                                                                   
 ## Gamete Formation                                                                   
-### Number of gametes per individual    
+### Number of Gametes Produced   
 The number of gametes per individual of each cytotype at each time step ($X_{i}$) is determined based on the base number of gametes per individual ($gnum.base$) and the strength of density dependency ($d$).   
     
 $$X_{i} \sim {\rm Poisson} \left(gnum*\exp\left\{-d_{i}\sum_{i=2}^4\sum_{j=1}^{2}c_{i,j}(t)\right\} \right)$$
@@ -185,14 +187,14 @@ maxy <- (max(c(d1_50plot$out, d1_100plot$out, d1_150plot$out, d1_200plot$out,
 par(mfrow = c(5, 1), mar=c(2,2,2,2))
 
 plot(x = d1_50plot$popsize, y = d1_50plot$out, col = "red", pch = 16,
-     xlab = "Population Size",  ylab = "Gametes Sampled", main="(B) d = 0.00001", xlim = c(0, 100050), ylim = c(0, maxy))
+     xlab = "Population Size",  ylab = "Gametes Sampled", main="(A) d = 0.00001", xlim = c(0, 100050), ylim = c(0, maxy))
 points(x = d1_100plot$popsize, y = d1_100plot$out, col = "blue", pch = 16)
 points(x = d1_150plot$popsize, y = d1_150plot$out, col = "green", pch = 16)
 points(x = d1_200plot$popsize, y = d1_200plot$out, col = "black", pch = 16)
 legend("topright", legend=c(50, 100, 150, 200), pch=16, col=c("red", "blue", "green", "black"))
 
 plot(x = de_50plot$popsize, y = de_50plot$out, col = "red", pch = 16,
-     xlab = "Population Size",  ylab = "Gametes Sampled", main="(A) d = 0.00009", xlim = c(0, 100050), ylim = c(0, maxy))
+     xlab = "Population Size",  ylab = "Gametes Sampled", main="(B) d = 0.00009", xlim = c(0, 100050), ylim = c(0, maxy))
 points(x = de_100plot$popsize, y = de_100plot$out, col = "blue", pch = 16)
 points(x = de_150plot$popsize, y = de_150plot$out, col = "green", pch = 16)
 points(x = de_200plot$popsize, y = de_200plot$out, col = "black", pch = 16)
@@ -278,7 +280,7 @@ points(x = d4_100plot$popsize, y = d4_100plot$out, col = "#798EF4", pch = 16)
 
 <br>
 
-### Types of gametes produced    
+### Types of Gametes Produced    
 
 The current model allows all cytotypes to produce reduced and unreduced gametes at rates set by $b$ and $cc$ (or $v$). Of the gametes produced, not all are viable. Diploids produce 1n and 2n gametes, both of which are viable. Triploids only produce viable gametes of 3n, with unviable 1n and 2n gametes. Autotetraploids produce only viable 2n gametes. 
 
@@ -287,11 +289,11 @@ The current model allows all cytotypes to produce reduced and unreduced gametes 
 ```{r echo = FALSE, fig.align='center'}
 knitr::include_graphics("img/Reproduction01.jpg", dpi = 200)
 ```
-**Figure 3**: Gametes produced by each cytotype. Here gam.vec indicates the $X_{i}$ at a time step, b is the rate of unreduced gamete formation,  v is the proportion triploid gametes that will be viable (cc), and $c_{i,j}$ is the total number of the ith cytotype that is reproductively mature (j=2) at time t. This figure is from Figure A1 in Gaynor et al. 2023.
+**Figure 3**: Gametes produced by each cytotype. Here gam.vec indicates the $X_{i}$ at a time step, b is the rate of unreduced gamete formation,  v is the proportion triploid gametes that will be viable (cc), and $c_{i,j}$ is the total number of the ith cytotype that is reproductively mature (j=2) at time t. This figure is Figure A1 in Gaynor et al. 2023.
 
 
 
-## Gamete mixing
+## Gamete Mixing
 The remaining parameters are associated with selfing rate ($s$) and mating choice ($mc$). 
 
 

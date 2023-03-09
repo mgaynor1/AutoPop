@@ -6,9 +6,9 @@ output:
  
 ---
 
-Here we describe the parameters associated with survival.
+Here we describe the parameters associated with immature and mature survival.
 
-**Table 1**: Summary of model parameters and definitions. Color indicates processes: reproduction (green), survival (red), and maturation (blue).  
+**Table 1**: Summary of model parameters associated with survival.
 
 
 | In-text | In-code |    Definition        | 
@@ -23,10 +23,10 @@ Here we describe the parameters associated with survival.
 Immature probability of survival was defined as followed:
      
 $$S_{i, 1}(t) = e^{-aii[j]*\sum_{j=1}^{2}c_{i,j}(t)}$$
-Where $c_{i, 1}(t + 1)$ is defined by based on a binominal distribution with $c_{i,1}(t)$ trials and probability of success equal to $S_{i,1}(t)$. As aii increases, the number of individuals expected to survive decreases (**Figure 1**).   
+Where $c_{i, 1}(t + 1)$ is defined by a binominal distribution with $c_{i,1}(t)$ trials and probability of success equal to $S_{i,1}(t)$. As aii increases, the number of individuals expected to survive decreases (**Figure 1**).   
 
 
-```{r immature, echo=FALSE, fig.align='center' }
+```{r immature, echo=FALSE, fig.align='center', fig.height = 10, fig.width = 8}
 poploop <- seq(10, 100000, by = 50)
 
 
@@ -69,24 +69,19 @@ plot(x = is5_plot$popsize, y = is5_plot$out, col = "red", pch = 16, type = "b",
 
 
 ```
-**Figure 1**: Expected number of individuals to survive when the immature survival probability is equal to the exponetial of aii times the population size.
+**Figure 1**: Expected number of individuals to survive given different immature survival probabilities.
 
 <br>
 
 ## Mature survival   
 Mature probability of survival was defined using a beta distribution to sample mature survival probability at each generation based on the mean mature survival probability ($\mu$) and  proportion of variance ($env.ci$). Where $c_{i, 2}(t + 1)$ is defined by based on a binominal distribution with $c_{i,2}(t)$ trials and probability of success equal to $S_{i,2}(t)$. The survival probability, $S_{i,2}(t)$, varies over time and is equal to $Beta(\alpha, \beta)$. 
 
-We can define $\alpha$ and $\beta$ based on $\mu$ and $env.ci$ as followed: 
-
-$$\sigma^{2} = ci*\mu(1-\mu)$$. 
-$$\alpha = \mu * \frac{\mu*(1-\mu)}{(\sigma^{2} - 1)}$$ 
-$$\beta = (1-\mu)*\frac{\mu*(1-\mu)}{(\sigma^{2} - 1)}$$.   
-
+We can define $\alpha$ and $\beta$ based on $\mu$ and $env.ci$ by first defining variance as $\sigma^{2} = ci*\mu(1-\mu)$, then $\alpha = \mu * \frac{\mu*(1-\mu)}{(\sigma^{2} - 1)}$ and $\beta = (1-\mu)*\frac{\mu*(1-\mu)}{(\sigma^{2} - 1)}$. 
 
 Note,  $0 \le env.ci < 1$, see Gaynor et al. 2023 for details. As env.ci increases, we see the variance in probability of survival also increase (**Figure 2**). Additionally, as the mature survival increase, so does the sampled probability of survival.
   
 
-```{r mature, echo=FALSE, fig.align='center'}
+```{r mature, echo=FALSE, fig.align='center', fig.height = 8, fig.width = 8}
 source("../R/mature.surv.calc.R")
 source("../R/var.option.R")
 source("../R/alphabeta.calc.R")
