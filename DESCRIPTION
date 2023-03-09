@@ -24,4 +24,7 @@ Suggests:
 Imports:
     MASS
 Config/testthat/edition: 3
-URL: http://mlgaynor.com/AutoPop/
+Maintainer: ML Gaynor <shellyleegaynor@gmail.com>
+URL: http://mlgaynor.com/AutoPop/, https://github.com/mgaynor1/AutoPop
+BugReports: https://github.com/mgaynor1/AutoPop/issues
+

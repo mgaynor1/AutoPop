@@ -36,4 +36,7 @@ articles:
   - Reproduction
   - Survival
   - Maturation
-
+navbar:
+    structure:
+      left: [reference, articles]
+      right: [search]
