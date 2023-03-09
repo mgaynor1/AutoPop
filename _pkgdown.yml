@@ -1,8 +1,6 @@
 url: http://mlgaynor.com/AutoPop/
 template:
   bootstrap: 5
-development:
-  mode: release
 reference:
 - title: Simulating data with AutoPop
   desc: |
