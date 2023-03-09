@@ -305,7 +305,7 @@ knitr::include_graphics("img/FigureS1.jpg", dpi = 200)
 
 
 ### Lazy Mating
-Note, we included a parameter called 'mate.lazy' which can be equal to TRUE or FALSE. When FALSE, this prevents selfing from occurring during outcrossing. This increases computational time by 31x.
+Note, we included a parameter called 'mate.lazy' which can be equal to TRUE or FALSE. When FALSE, this prevents selfing from occurring during outcrossing. Since preventing pairing of gametes produced by the same individual increases computational time by 31x, we provide a function without this feature. We do not recommend lazy mating. 
 
 
 

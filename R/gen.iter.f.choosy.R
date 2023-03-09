@@ -35,11 +35,18 @@
 #' * V12: number of gametes per tetraploid individual at t - 1.
 #' * gen: generation.
 #' * sum: total number of individuals.
-#' * sum2x-sum4x: total number of each cytotype at that generation.
-#' * V1a:V6a: relative abundance of V1:V6 in that generation.
-#' * C2: relative abundance of all diploids (ie. sum2x/sum).
-#' * C3: relative abundance of all triploids (ie. sum3x/sum).
-#' * C4: relative abundance of all tetraploids (ie. sum4x/sum)
+#' * sum2x: sum of immature and mature diploids.
+#' * sum3x: sum of immature and mature triploids.
+#' * sum4x: sum of immature and mature tetraploids.
+#' * V1a: relative abundance of immature diploids (V1).
+#' * V2a: relative abundance of immature triploids (V2).
+#' * V3a: relative abundance of immature tetraploids (V3).
+#' * V4a: relative abundance of mature diploids (V4).
+#' * V5a: relative abundance of mature triploids (V5).
+#' * V6a: relative abundance of mature tetraploids (V6).
+#' * C2: relative abundance of all diploids (sum2x/sum).
+#' * C3: relative abundance of all triploids (sum3x/sum).
+#' * C4: relative abundance of all tetraploids (sum4x/sum)
 #'
 #'
 

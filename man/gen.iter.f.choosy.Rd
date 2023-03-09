@@ -73,11 +73,18 @@ A single data frame as defined by \code{form.autopop()}. Each row is a generatio
 \item V12: number of gametes per tetraploid individual at t - 1.
 \item gen: generation.
 \item sum: total number of individuals.
-\item sum2x-sum4x: total number of each cytotype at that generation.
-\item V1a:V6a: relative abundance of V1:V6 in that generation.
-\item C2: relative abundance of all diploids (ie. sum2x/sum).
-\item C3: relative abundance of all triploids (ie. sum3x/sum).
-\item C4: relative abundance of all tetraploids (ie. sum4x/sum)
+\item sum2x: sum of immature and mature diploids.
+\item sum3x: sum of immature and mature triploids.
+\item sum4x: sum of immature and mature tetraploids.
+\item V1a: relative abundance of immature diploids (V1).
+\item V2a: relative abundance of immature triploids (V2).
+\item V3a: relative abundance of immature tetraploids (V3).
+\item V4a: relative abundance of mature diploids (V4).
+\item V5a: relative abundance of mature triploids (V5).
+\item V6a: relative abundance of mature tetraploids (V6).
+\item C2: relative abundance of all diploids (sum2x/sum).
+\item C3: relative abundance of all triploids (sum3x/sum).
+\item C4: relative abundance of all tetraploids (sum4x/sum)
 }
 }
 \description{
