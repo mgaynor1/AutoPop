@@ -111,7 +111,7 @@ example.sim <- gen.iter.f.choosy(generations = 10000, # Number of generations
 
 
 ## Parallel Example
-Note, this example was  SLURM cluster
+Note, this example was designed to run on a SLURM-based cluster.
 
 ```{r eval=FALSE, include=TRUE}
 # Load Packages
