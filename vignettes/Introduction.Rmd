@@ -17,45 +17,49 @@ library(knitr)
 
 
 ## Summary
-AutoPop is an R-based joint-dynamic population simulation for diploids, triploids, and autotetraploids. For details on these methods, see [Gaynor et al. 2023](). To summarize, this package contains a stochastic stage-structured matrix population dynamics model for diploid, triploid, and autotetraploid perennial plants with overlapping generations. Specifically, yhis model includes three cytotypes (diploid, triploids, and autotetraploids), as well as two life stages, in regards to reproductive ability (immature and mature), for a total of six stages each represented by $c_{i,j}$ where i = \{2, 3, 4\} and j = \{1,2\}.
+AutoPop is an R-based joint-dynamic population simulation for diploids, triploids, and autotetraploids. For details on these methods, see [Gaynor et al. 2023](). To summarize, this package contains a stochastic stage-structured matrix population dynamics model for diploid, triploid, and autotetraploid perennial plants with overlapping generations. Specifically, this model includes three cytotypes (diploids, triploids, and autotetraploids), as well as two life stages, in regards to reproductive ability (immature and mature), for a total of six stages each represented by $c_{i,j}$ where i = \{2, 3, 4\} and j = \{1,2\}.
 
 Each time step includes three processes: 
 
--   <span style="color:green">Reproduction</span>
--   <span style="color:red">Survival</span>
--   <span style="color:blue">Maturation</span>
-
+-   <a style="color:green" href="http://mlgaynor.com/AutoPop/articles/Reproduction.html" target="_blank">Reproduction</a>    
+     - $\color{green}{F_{i,k}(t)}$ is the number of immature individuals of ploidal level $i$ produced by mature individuals of ploidal level $k$.   
+-   <a style="color:red" href="http://mlgaynor.com/AutoPop/articles/Survival.html" target="_blank">Survival</a>    
+    -  $\color{red}{S_{i,j}(t)}$ is the survival probability of individuals with ploidal level $i$ and life stage $j$.   
+-   <a style="color:blue" href="http://mlgaynor.com/AutoPop/articles/Maturation.html" target="_blank">Maturation</a>    
+    - $\color{blue}{M_{i}}$  is the maturation probability of immature individuals with ploidal level $i$.   
 
 $$ 
 =
 \left(\begin{array}{cc} 
-C_{2,1} \\
-C_{3,1} \\
-C_{4,1} \\
-C_{2,2} \\
-C_{3,2} \\
-C_{4,2} \\
+c_{2,1}(t) \\
+c_{3,1}(t) \\
+c_{4,1}(t) \\
+c_{2,2}(t) \\
+c_{3,2}(t) \\
+c_{4,2}(t) \\
 \end{array}\right)
 \left(\begin{array}{cc} 
-\color{red}{S_{2,1}} & 0 & 0 & \color{green}{F_{2,2}} & \color{green}{F_{2,3}} & \color{green}{F_{2,4}}\\ 
-0 & \color{red}{S_{3,1}} & 0 & \color{green}{F_{3,2}} & \color{green}{F_{3,3}} & \color{green}{F_{3,4}}\\
-0 & 0 & \color{red}{S_{4,1}} & \color{green}{F_{4,2}} & \color{green}{F_{4,3}} & \color{green}{F_{4,4}}\\
-\color{blue}{M_{2}}& 0 & 0 & \color{red}{S_{2,2}} & 0 & 0 \\
-0 & \color{blue}{M_{3}} & 0 & 0 & \color{red}{S_{3,2}} & 0\\
-0 & 0 & \color{blue}{M_{4}} & 0 & 0 & \color{red}{S_{4,2}} \\
+\color{red}{S_{2,1}(t)} & 0 & 0 & \color{green}{F_{2,2}(t)} & \color{green}{F_{2,3}(t)} & \color{green}{F_{2,4}(t)}\\ 
+0 & \color{red}{S_{3,1}(t)} & 0 & \color{green}{F_{3,2}(t)} & \color{green}{F_{3,3}(t)} & \color{green}{F_{3,4}(t)}\\
+0 & 0 & \color{red}{S_{4,1}(t)} & \color{green}{F_{4,2}(t)} & \color{green}{F_{4,3}(t)} & \color{green}{F_{4,4}(t)}\\
+\color{blue}{M_{2}}& 0 & 0 & \color{red}{S_{2,2}(t)} & 0 & 0 \\
+0 & \color{blue}{M_{3}} & 0 & 0 & \color{red}{S_{3,2}(t)} & 0\\
+0 & 0 & \color{blue}{M_{4}} & 0 & 0 & \color{red}{S_{4,2}(t)} \\
 \end{array}\right)
 $$
 
 
 
 or in matrix notation:
-
+$$ 
 \begin{equation}
-\mathbf{C_{t+1}} = \mathbf{A}\mathbf{C_{t}}.
+\mathbf{C}(t+1) = \mathbf{A}(t)\mathbf{C}(t),
 \end{equation}
-
+$$ 
 
 <br>
+
+
 
 ## Model Parameters
 
@@ -63,19 +67,90 @@ or in matrix notation:
 
 | In-text | In-code |    Definition        | 
 |:--------:|:--------:|:-------------------------------------|
-|$generations$ | $generations$ |	Number of time steps 		| 
-|$init.pop$ |   $init.pop$ 	| Initial population size 	 |
-|$\color{green}{gnum}$  |$\color{green}{gnum.base}$   |  Number of gametes produced by a mature individual     |
-|$\color{green}{d}$ | $\color{green}{d}$ |   	Strength of density dependence 	 |
-||$\color{green}{density.type}$ | Sets type of density dependency utilized when defining number of gametes per individual. Options: "all" or "like-cytotype" | 
-|$\color{green}{b}$    |$\color{green}{b}$ | Frequency of unreduced gamete formation |
-|$\color{green}{v}$ |$\color{green}{cc}$  | Proportion of viable triploid gametes 		|
-|$\color{green}{s}$|$\color{green}{s}$ 	| Selfing rate      |
-|$\color{green}{mc}$ | $\color{green}{mc}$ | Strength of mating choice 	|
-|$\color{red}{a_{i,i}}$ |$\color{red}{aii.vec}$ | Cytotype-specific immature survival probability 	|
-|$\color{red}{\mu}$ | $\color{red}{as.msurv}$	| Mean mature survival probability 	|
-|$\color{red}{ci}$| $\color{red}{env.ci}$		| Proportion of environmental variance	|
-|$\color{blue}{as.matur}$|$\color{blue}{as.matur}$	|  Cytotype-specific maturation probability 	|                                                                                                                                                                  
+|$generations$ | $generations$ |	Number of generations to simulate.		| 
+|$init.pop$ |   $init.pop$ 	|  Number of mature diploids in the initial founding population.	 |
+|$\color{green}{gnum}$  |$\color{green}{gnum.base}$   | Mean number of gametes per individual per cytotype.     |
+|$\color{green}{d}$ | $\color{green}{d}$ |   	Strength of density dependency on gamete production for each cytotype.	 |
+||$\color{green}{density.type}$ | Sets type of density dependency utilized when defining number of gametes per individual. Options: "all" or "like-cytotype". | 
+|$\color{green}{b}$    |$\color{green}{b}$ | Proportion of unreduced gamete formed by each diploid and tetraploid individual.|
+|$\color{green}{v}$ |$\color{green}{cc}$  | Proportion of 3n gamete formation from each triploid individual. 		|
+|$\color{green}{s}$|$\color{green}{s}$ 	|Selfing rate.      |
+|$\color{green}{mc}$ | $\color{green}{mc}$ | Strength of mating choice.  	|
+||$\color{green}{mate.lazy}$ | Prevents selfing from occurring during outcrossing.| 
+|$\color{red}{a_{i,i}}$ |$\color{red}{aii.vec}$ | Survival probability of an immature individual for each cytotype. 	|
+|$\color{red}{\mu}$ | $\color{red}{as.msurv}$	| Survival probability of an mature individual for each cytotype. 	|
+|$\color{red}{ci}$| $\color{red}{env.ci}$		| Proportion of environmental variance used to define mature survival rate per generation.	|
+|$\color{blue}{as.matur}$|$\color{blue}{as.matur}$	| The probability of maturation from an immature stage to the mature stage for each cytotype. 	|                     
 
 
+## Simulation Example  
+To simulate multiple generations, we developed the function `gen.iter.f.choosy()`. If you are exploring many parameter sets, we recommend running model replicates in parallel using [foreach](https://cran.r-project.org/web/packages/foreach/) and [doParallel](https://cran.r-project.org/web/packages/doParallel/index.html).
+
+### Basic Example
+```{r eval=FALSE, include=TRUE}
+# Load Packages
+library(AutoPop)
+
+# Example Simulation
+example.sim <- gen.iter.f.choosy(generations = 10000, # Number of generations
+                                 init.pop = 100, # Number of mature diploids in initial pop
+                                 gnum.base = c(100, 100, 100), # Number of gametes per individual per cytotype
+                                 d = c(0.0001, 0.0009, 0.0001), # Strength of density dependency
+                                 density.type = "all", # Type of density dependence
+                                 b = 0.02, # Proportion of unreduced gamete formation
+                                 cc = 0.052, # Proportion of 3n gamete formation 
+                                 s = 0.1, # Selfing rate
+                                 mc = 0.1, # Strength of mating choice
+                                 mate.lazy = FALSE, # Prevents selfing from occurring during outcrossing
+                                 env.ci = 0.1, # Proportion of environmental variance
+                                 aii.vec = c(0.0005, 0.005, 0.0005), # Probability of survival of immature individuals
+                                 as.msurv =  c(0.60, 0.06, 0.60), # Probability of survival of mature individuals
+                                 as.matur = c(0.4, 0.02, 0.4) # Maturation rate
+                           )
+```
+
+
+## Parallel Example
+Note, this example was  SLURM cluster
+
+```{r eval=FALSE, include=TRUE}
+# Load Packages
+library(foreach)
+library(doParallel)
+library(pryr)
+
+# Detect CPIs available
+## Eegister the cluster for using foreach
+n.cpus <- as.numeric(Sys.getenv("SLURM_CPUS_PER_TASK"))
+print(n.cpus)
+cl <- makeCluster(n.cpus)
+registerDoParallel(cl)
+
+# Example Simulation
+startparallel <- Sys.time()
+temp <- foreach(iter = 1:500)%dopar%{
+				suppressWarnings(gen.iter.f.choosy(generations = 10000, # Number of generations
+                           init.pop = 100, # Number of mature diploids in initial pop
+                           gnum.base = c(100, 100, 100), # Number of gametes per individual per cytotype
+                           d = c(0.0001, 0.0009, 0.0001), # Strength of density dependency
+                           density.type = "all", # Type of density dependence
+                           b = 0.02, # Proportion of unreduced gamete formation
+                           cc = 0.052, # Proportion of 3n gamete formation 
+                           s = 0.1, # Selfing rate
+                           mc = 0.1, # Strength of mating choice
+                           mate.lazy = FALSE, # Prevents selfing from occurring during outcrossing
+                           env.ci = 0.1, # Proportion of environmental variance
+                           aii.vec = c(0.0005, 0.005, 0.0005), # Probability of survival of immature individuals
+                           as.msurv =  c(0.60, 0.06, 0.60), # Probability of survival of mature individuals
+                           as.matur = c(0.4, 0.02, 0.4) # Maturation rate
+                     ))
+          	}
+
+save(temp,  file = "temp.RData")
+
+## Benchmark 
+totalparallel <- Sys.time() - startparallel
+print(totalparallel) # How much time did this simulation take?
+print(pryr::mem_used()) # How much memory did this simulation use?
+```
 

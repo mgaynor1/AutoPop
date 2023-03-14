@@ -12,7 +12,7 @@ Here we describe the single parameter associated with maturation.
    
  | In-text | In-code |    Definition        | 
 |:--------:|:--------:|:-------------------------------------|
-|$\color{blue}{as.matur}$|$\color{blue}{as.matur}$	| Cytotype-specific maturation probability 	| 
+|$\color{blue}{as.matur}$|$\color{blue}{as.matur}$	| The probability of maturation from an immature stage to the mature stage for each cytotype.  	| 
 
 
 Maturation rate, $as.mature = c(M_{2}, M_{3}, M_{4})$, is the probability an immature will become reproductively mature. Each generation the number of immature individuals that become mature is sampled based on a binominal distribution with $c_{i,1}(t)$ trials and probability of success equal to $M_{i}$. As  maturation rate increases, the number of individuals that mature increases (**Figure 1**).

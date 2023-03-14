@@ -81,46 +81,71 @@ diploids, triploids, and autotetraploids. For details on these methods,
 see <a href="">Gaynor et al. 2023</a>. To summarize, this package
 contains a stochastic stage-structured matrix population dynamics model
 for diploid, triploid, and autotetraploid perennial plants with
-overlapping generations. Specifically, yhis model includes three
-cytotypes (diploid, triploids, and autotetraploids), as well as two life
-stages, in regards to reproductive ability (immature and mature), for a
-total of six stages each represented by <span class="math inline">\(c_{i,j}\)</span> where i = {2, 3, 4} and j =
+overlapping generations. Specifically, this model includes three
+cytotypes (diploids, triploids, and autotetraploids), as well as two
+life stages, in regards to reproductive ability (immature and mature),
+for a total of six stages each represented by <span class="math inline">\(c_{i,j}\)</span> where i = {2, 3, 4} and j =
 {1,2}.</p>
 <p>Each time step includes three processes:</p>
 <ul>
-<li><span style="color:green">Reproduction</span></li>
-<li><span style="color:red">Survival</span></li>
-<li><span style="color:blue">Maturation</span></li>
+<li>
+<a style="color:green" href="http://mlgaynor.com/AutoPop/articles/Reproduction.html" target="_blank">Reproduction</a>
+<ul>
+<li>
+<span class="math inline">\(\color{green}{F_{i,k}(t)}\)</span> is
+the number of immature individuals of ploidal level <span class="math inline">\(i\)</span> produced by mature individuals of
+ploidal level <span class="math inline">\(k\)</span>.<br>
+</li>
+</ul>
+</li>
+<li>
+<a style="color:red" href="http://mlgaynor.com/AutoPop/articles/Survival.html" target="_blank">Survival</a>
+<ul>
+<li>
+<span class="math inline">\(\color{red}{S_{i,j}(t)}\)</span> is the
+survival probability of individuals with ploidal level <span class="math inline">\(i\)</span> and life stage <span class="math inline">\(j\)</span>.<br>
+</li>
+</ul>
+</li>
+<li>
+<a style="color:blue" href="http://mlgaynor.com/AutoPop/articles/Maturation.html" target="_blank">Maturation</a>
+<ul>
+<li>
+<span class="math inline">\(\color{blue}{M_{i}}\)</span> is the
+maturation probability of immature individuals with ploidal level <span class="math inline">\(i\)</span>.</li>
+</ul>
+</li>
 </ul>
 <p><span class="math display">\[
 =
 \left(\begin{array}{cc}
-C_{2,1} \\
-C_{3,1} \\
-C_{4,1} \\
-C_{2,2} \\
-C_{3,2} \\
-C_{4,2} \\
+c_{2,1}(t) \\
+c_{3,1}(t) \\
+c_{4,1}(t) \\
+c_{2,2}(t) \\
+c_{3,2}(t) \\
+c_{4,2}(t) \\
 \end{array}\right)
 \left(\begin{array}{cc}
-\color{red}{S_{2,1}} &amp; 0 &amp; 0 &amp; \color{green}{F_{2,2}} &amp;
-\color{green}{F_{2,3}} &amp; \color{green}{F_{2,4}}\\
-0 &amp; \color{red}{S_{3,1}} &amp; 0 &amp; \color{green}{F_{3,2}} &amp;
-\color{green}{F_{3,3}} &amp; \color{green}{F_{3,4}}\\
-0 &amp; 0 &amp; \color{red}{S_{4,1}} &amp; \color{green}{F_{4,2}} &amp;
-\color{green}{F_{4,3}} &amp; \color{green}{F_{4,4}}\\
-\color{blue}{M_{2}}&amp; 0 &amp; 0 &amp; \color{red}{S_{2,2}} &amp; 0
+\color{red}{S_{2,1}(t)} &amp; 0 &amp; 0 &amp; \color{green}{F_{2,2}(t)}
+&amp; \color{green}{F_{2,3}(t)} &amp; \color{green}{F_{2,4}(t)}\\
+0 &amp; \color{red}{S_{3,1}(t)} &amp; 0 &amp; \color{green}{F_{3,2}(t)}
+&amp; \color{green}{F_{3,3}(t)} &amp; \color{green}{F_{3,4}(t)}\\
+0 &amp; 0 &amp; \color{red}{S_{4,1}(t)} &amp; \color{green}{F_{4,2}(t)}
+&amp; \color{green}{F_{4,3}(t)} &amp; \color{green}{F_{4,4}(t)}\\
+\color{blue}{M_{2}}&amp; 0 &amp; 0 &amp; \color{red}{S_{2,2}(t)} &amp; 0
 &amp; 0 \\
-0 &amp; \color{blue}{M_{3}} &amp; 0 &amp; 0 &amp; \color{red}{S_{3,2}}
-&amp; 0\\
+0 &amp; \color{blue}{M_{3}} &amp; 0 &amp; 0 &amp;
+\color{red}{S_{3,2}(t)} &amp; 0\\
 0 &amp; 0 &amp; \color{blue}{M_{4}} &amp; 0 &amp; 0 &amp;
-\color{red}{S_{4,2}} \\
+\color{red}{S_{4,2}(t)} \\
 \end{array}\right)
 \]</span></p>
-<p>or in matrix notation:</p>
-<p><span class="math display">\[\begin{equation}
-\mathbf{C_{t+1}} = \mathbf{A}\mathbf{C_{t}}.
-\end{equation}\]</span></p>
+<p>or in matrix notation: <span class="math display">\[
+\begin{equation}
+\mathbf{C}(t+1) = \mathbf{A}(t)\mathbf{C}(t),
+\end{equation}
+\]</span></p>
 <p><br></p>
 </div>
 <div class="section level2">
@@ -144,71 +169,163 @@ definitions. Color indicates processes: reproduction (green), survival
 <tr class="odd">
 <td align="center"><span class="math inline">\(generations\)</span></td>
 <td align="center"><span class="math inline">\(generations\)</span></td>
-<td align="left">Number of time steps</td>
+<td align="left">Number of generations to simulate.</td>
 </tr>
 <tr class="even">
 <td align="center"><span class="math inline">\(init.pop\)</span></td>
 <td align="center"><span class="math inline">\(init.pop\)</span></td>
-<td align="left">Initial population size</td>
+<td align="left">Number of mature diploids in the initial founding
+population.</td>
 </tr>
 <tr class="odd">
 <td align="center"><span class="math inline">\(\color{green}{gnum}\)</span></td>
 <td align="center"><span class="math inline">\(\color{green}{gnum.base}\)</span></td>
-<td align="left">Number of gametes produced by a mature individual</td>
+<td align="left">Mean number of gametes per individual per
+cytotype.</td>
 </tr>
 <tr class="even">
 <td align="center"><span class="math inline">\(\color{green}{d}\)</span></td>
 <td align="center"><span class="math inline">\(\color{green}{d}\)</span></td>
-<td align="left">Strength of density dependence</td>
+<td align="left">Strength of density dependency on gamete production for
+each cytotype.</td>
 </tr>
 <tr class="odd">
 <td align="center"></td>
 <td align="center"><span class="math inline">\(\color{green}{density.type}\)</span></td>
 <td align="left">Sets type of density dependency utilized when defining
-number of gametes per individual. Options: “all” or “like-cytotype”</td>
+number of gametes per individual. Options: “all” or
+“like-cytotype”.</td>
 </tr>
 <tr class="even">
 <td align="center"><span class="math inline">\(\color{green}{b}\)</span></td>
 <td align="center"><span class="math inline">\(\color{green}{b}\)</span></td>
-<td align="left">Frequency of unreduced gamete formation</td>
+<td align="left">Proportion of unreduced gamete formed by each diploid
+and tetraploid individual.</td>
 </tr>
 <tr class="odd">
 <td align="center"><span class="math inline">\(\color{green}{v}\)</span></td>
 <td align="center"><span class="math inline">\(\color{green}{cc}\)</span></td>
-<td align="left">Proportion of viable triploid gametes</td>
+<td align="left">Proportion of 3n gamete formation from each triploid
+individual.</td>
 </tr>
 <tr class="even">
 <td align="center"><span class="math inline">\(\color{green}{s}\)</span></td>
 <td align="center"><span class="math inline">\(\color{green}{s}\)</span></td>
-<td align="left">Selfing rate</td>
+<td align="left">Selfing rate.</td>
 </tr>
 <tr class="odd">
 <td align="center"><span class="math inline">\(\color{green}{mc}\)</span></td>
 <td align="center"><span class="math inline">\(\color{green}{mc}\)</span></td>
-<td align="left">Strength of mating choice</td>
+<td align="left">Strength of mating choice.</td>
 </tr>
 <tr class="even">
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\color{green}{mate.lazy}\)</span></td>
+<td align="left">Prevents selfing from occurring during
+outcrossing.</td>
+</tr>
+<tr class="odd">
 <td align="center"><span class="math inline">\(\color{red}{a_{i,i}}\)</span></td>
 <td align="center"><span class="math inline">\(\color{red}{aii.vec}\)</span></td>
-<td align="left">Cytotype-specific immature survival probability</td>
-</tr>
-<tr class="odd">
-<td align="center"><span class="math inline">\(\color{red}{\mu}\)</span></td>
-<td align="center"><span class="math inline">\(\color{red}{as.msurv}\)</span></td>
-<td align="left">Mean mature survival probability</td>
+<td align="left">Survival probability of an immature individual for each
+cytotype.</td>
 </tr>
 <tr class="even">
-<td align="center"><span class="math inline">\(\color{red}{ci}\)</span></td>
-<td align="center"><span class="math inline">\(\color{red}{env.ci}\)</span></td>
-<td align="left">Proportion of environmental variance</td>
+<td align="center"><span class="math inline">\(\color{red}{\mu}\)</span></td>
+<td align="center"><span class="math inline">\(\color{red}{as.msurv}\)</span></td>
+<td align="left">Survival probability of an mature individual for each
+cytotype.</td>
 </tr>
 <tr class="odd">
+<td align="center"><span class="math inline">\(\color{red}{ci}\)</span></td>
+<td align="center"><span class="math inline">\(\color{red}{env.ci}\)</span></td>
+<td align="left">Proportion of environmental variance used to define
+mature survival rate per generation.</td>
+</tr>
+<tr class="even">
 <td align="center"><span class="math inline">\(\color{blue}{as.matur}\)</span></td>
 <td align="center"><span class="math inline">\(\color{blue}{as.matur}\)</span></td>
-<td align="left">Cytotype-specific maturation probability</td>
+<td align="left">The probability of maturation from an immature stage to
+the mature stage for each cytotype.</td>
 </tr>
 </tbody>
 </table>
+</div>
+<div class="section level2">
+<h2 id="simulation-example">Simulation Example<a class="anchor" aria-label="anchor" href="#simulation-example"></a>
+</h2>
+<p>To simulate multiple generations, we developed the function
+<code><a href="../reference/gen.iter.f.choosy.html">gen.iter.f.choosy()</a></code>. If you are exploring many parameter
+sets, we recommend running model replicates in parallel using <a href="https://cran.r-project.org/web/packages/foreach/" class="external-link">foreach</a> and
+<a href="https://cran.r-project.org/web/packages/doParallel/index.html" class="external-link">doParallel</a>.</p>
+<div class="section level3">
+<h3 id="basic-example">Basic Example<a class="anchor" aria-label="anchor" href="#basic-example"></a>
+</h3>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Load Packages</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://mlgaynor.com/AutoPop/">AutoPop</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Example Simulation</span></span>
+<span><span class="va">example.sim</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gen.iter.f.choosy.html">gen.iter.f.choosy</a></span><span class="op">(</span>generations <span class="op">=</span> <span class="fl">10000</span>, <span class="co"># Number of generations</span></span>
+<span>                                 init.pop <span class="op">=</span> <span class="fl">100</span>, <span class="co"># Number of mature diploids in initial pop</span></span>
+<span>                                 gnum.base <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">100</span>, <span class="fl">100</span><span class="op">)</span>, <span class="co"># Number of gametes per individual per cytotype</span></span>
+<span>                                 d <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.0001</span>, <span class="fl">0.0009</span>, <span class="fl">0.0001</span><span class="op">)</span>, <span class="co"># Strength of density dependency</span></span>
+<span>                                 density.type <span class="op">=</span> <span class="st">"all"</span>, <span class="co"># Type of density dependence</span></span>
+<span>                                 b <span class="op">=</span> <span class="fl">0.02</span>, <span class="co"># Proportion of unreduced gamete formation</span></span>
+<span>                                 cc <span class="op">=</span> <span class="fl">0.052</span>, <span class="co"># Proportion of 3n gamete formation </span></span>
+<span>                                 s <span class="op">=</span> <span class="fl">0.1</span>, <span class="co"># Selfing rate</span></span>
+<span>                                 mc <span class="op">=</span> <span class="fl">0.1</span>, <span class="co"># Strength of mating choice</span></span>
+<span>                                 mate.lazy <span class="op">=</span> <span class="cn">FALSE</span>, <span class="co"># Prevents selfing from occurring during outcrossing</span></span>
+<span>                                 env.ci <span class="op">=</span> <span class="fl">0.1</span>, <span class="co"># Proportion of environmental variance</span></span>
+<span>                                 aii.vec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.0005</span>, <span class="fl">0.005</span>, <span class="fl">0.0005</span><span class="op">)</span>, <span class="co"># Probability of survival of immature individuals</span></span>
+<span>                                 as.msurv <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.60</span>, <span class="fl">0.06</span>, <span class="fl">0.60</span><span class="op">)</span>, <span class="co"># Probability of survival of mature individuals</span></span>
+<span>                                 as.matur <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.4</span>, <span class="fl">0.02</span>, <span class="fl">0.4</span><span class="op">)</span> <span class="co"># Maturation rate</span></span>
+<span>                           <span class="op">)</span></span></code></pre></div>
+</div>
+</div>
+<div class="section level2">
+<h2 id="parallel-example">Parallel Example<a class="anchor" aria-label="anchor" href="#parallel-example"></a>
+</h2>
+<p>Note, this example was SLURM cluster</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Load Packages</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/RevolutionAnalytics/foreach" class="external-link">foreach</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/RevolutionAnalytics/doparallel" class="external-link">doParallel</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/hadley/pryr" class="external-link">pryr</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Detect CPIs available</span></span>
+<span><span class="co">## Eegister the cluster for using foreach</span></span>
+<span><span class="va">n.cpus</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"SLURM_CPUS_PER_TASK"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">n.cpus</span><span class="op">)</span></span>
+<span><span class="va">cl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/parallel/makeCluster.html" class="external-link">makeCluster</a></span><span class="op">(</span><span class="va">n.cpus</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/doParallel/man/registerDoParallel.html" class="external-link">registerDoParallel</a></span><span class="op">(</span><span class="va">cl</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Example Simulation</span></span>
+<span><span class="va">startparallel</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/foreach/man/foreach.html" class="external-link">foreach</a></span><span class="op">(</span>iter <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">500</span><span class="op">)</span><span class="op"><a href="https://rdrr.io/pkg/foreach/man/foreach.html" class="external-link">%dopar%</a></span><span class="op">{</span></span>
+<span>                <span class="fu"><a href="https://rdrr.io/r/base/warning.html" class="external-link">suppressWarnings</a></span><span class="op">(</span><span class="fu"><a href="../reference/gen.iter.f.choosy.html">gen.iter.f.choosy</a></span><span class="op">(</span>generations <span class="op">=</span> <span class="fl">10000</span>, <span class="co"># Number of generations</span></span>
+<span>                           init.pop <span class="op">=</span> <span class="fl">100</span>, <span class="co"># Number of mature diploids in initial pop</span></span>
+<span>                           gnum.base <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">100</span>, <span class="fl">100</span><span class="op">)</span>, <span class="co"># Number of gametes per individual per cytotype</span></span>
+<span>                           d <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.0001</span>, <span class="fl">0.0009</span>, <span class="fl">0.0001</span><span class="op">)</span>, <span class="co"># Strength of density dependency</span></span>
+<span>                           density.type <span class="op">=</span> <span class="st">"all"</span>, <span class="co"># Type of density dependence</span></span>
+<span>                           b <span class="op">=</span> <span class="fl">0.02</span>, <span class="co"># Proportion of unreduced gamete formation</span></span>
+<span>                           cc <span class="op">=</span> <span class="fl">0.052</span>, <span class="co"># Proportion of 3n gamete formation </span></span>
+<span>                           s <span class="op">=</span> <span class="fl">0.1</span>, <span class="co"># Selfing rate</span></span>
+<span>                           mc <span class="op">=</span> <span class="fl">0.1</span>, <span class="co"># Strength of mating choice</span></span>
+<span>                           mate.lazy <span class="op">=</span> <span class="cn">FALSE</span>, <span class="co"># Prevents selfing from occurring during outcrossing</span></span>
+<span>                           env.ci <span class="op">=</span> <span class="fl">0.1</span>, <span class="co"># Proportion of environmental variance</span></span>
+<span>                           aii.vec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.0005</span>, <span class="fl">0.005</span>, <span class="fl">0.0005</span><span class="op">)</span>, <span class="co"># Probability of survival of immature individuals</span></span>
+<span>                           as.msurv <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.60</span>, <span class="fl">0.06</span>, <span class="fl">0.60</span><span class="op">)</span>, <span class="co"># Probability of survival of mature individuals</span></span>
+<span>                           as.matur <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.4</span>, <span class="fl">0.02</span>, <span class="fl">0.4</span><span class="op">)</span> <span class="co"># Maturation rate</span></span>
+<span>                     <span class="op">)</span><span class="op">)</span></span>
+<span>            <span class="op">}</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/save.html" class="external-link">save</a></span><span class="op">(</span><span class="va">temp</span>,  file <span class="op">=</span> <span class="st">"temp.RData"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Benchmark </span></span>
+<span><span class="va">totalparallel</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">startparallel</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">totalparallel</span><span class="op">)</span> <span class="co"># How much time did this simulation take?</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu">pryr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pryr/man/mem_used.html" class="external-link">mem_used</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="co"># How much memory did this simulation use?</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

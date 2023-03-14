@@ -78,7 +78,7 @@ these parameters may influence our model. We can split reproduction into
 two parts:</p>
 <ol style="list-style-type: decimal">
 <li>Gamete Formation</li>
-<li>Gamete Mixing</li>
+<li>Gamete Union</li>
 </ol>
 <p><strong>Table 1</strong>: Summary of model parameters associated with
 reproduction.</p>
@@ -97,38 +97,49 @@ reproduction.</p>
 <tr class="odd">
 <td align="center"><span class="math inline">\(\color{green}{\lambda_{i}}\)</span></td>
 <td align="center"><span class="math inline">\(\color{green}{gnum.base}\)</span></td>
-<td align="left">Number of gametes produced by a mature individual</td>
+<td align="left">Mean number of gametes per individual per
+cytotype.</td>
 </tr>
 <tr class="even">
 <td align="center"><span class="math inline">\(\color{green}{d}\)</span></td>
 <td align="center"><span class="math inline">\(\color{green}{d}\)</span></td>
-<td align="left">Strength of density dependence</td>
+<td align="left">Strength of density dependency on gamete production for
+each cytotype.</td>
 </tr>
 <tr class="odd">
 <td align="center"></td>
 <td align="center"><span class="math inline">\(\color{green}{density.type}\)</span></td>
-<td align="left">Type of density dependency Options: “all” or
-“like-cytotype”</td>
+<td align="left">Sets type of density dependency utilized when defining
+number of gametes per individual. Options: “all” or
+“like-cytotype”.</td>
 </tr>
 <tr class="even">
 <td align="center"><span class="math inline">\(\color{green}{b}\)</span></td>
 <td align="center"><span class="math inline">\(\color{green}{b}\)</span></td>
-<td align="left">Frequency of unreduced gamete formation</td>
+<td align="left">Proportion of unreduced gamete formed by each diploid
+and tetraploid individual.</td>
 </tr>
 <tr class="odd">
 <td align="center"><span class="math inline">\(\color{green}{v}\)</span></td>
 <td align="center"><span class="math inline">\(\color{green}{cc}\)</span></td>
-<td align="left">Proportion of viable triploid gametes</td>
+<td align="left">Proportion of 3n gamete formation from each triploid
+individual.</td>
 </tr>
 <tr class="even">
 <td align="center"><span class="math inline">\(\color{green}{s}\)</span></td>
 <td align="center"><span class="math inline">\(\color{green}{s}\)</span></td>
-<td align="left">Selfing rate</td>
+<td align="left">Selfing rate.</td>
 </tr>
 <tr class="odd">
 <td align="center"><span class="math inline">\(\color{green}{mc}\)</span></td>
 <td align="center"><span class="math inline">\(\color{green}{mc}\)</span></td>
-<td align="left">Strength of mating choice</td>
+<td align="left">Strength of mating choice.</td>
+</tr>
+<tr class="even">
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\color{green}{mate.lazy}\)</span></td>
+<td align="left">Prevents selfing from occurring during
+outcrossing.</td>
 </tr>
 </tbody>
 </table>
@@ -139,10 +150,10 @@ reproduction.</p>
 <h3 id="number-of-gametes-produced">Number of Gametes Produced<a class="anchor" aria-label="anchor" href="#number-of-gametes-produced"></a>
 </h3>
 <p>The number of gametes per individual of each cytotype at each time
-step (<span class="math inline">\(X_{i}\)</span>) is determined based on
-the base number of gametes per individual (<span class="math inline">\(gnum.base\)</span>) and the strength of density
+step (<span class="math inline">\(X_{i}(t)\)</span>) is determined based
+on the base number of gametes per individual (<span class="math inline">\(gnum.base\)</span>) and the strength of density
 dependency (<span class="math inline">\(d\)</span>).</p>
-<p><span class="math display">\[X_{i} \sim {\rm Poisson}
+<p><span class="math display">\[X_{i}(t) \sim {\rm Poisson}
 \left(gnum*\exp\left\{-d_{i}\sum_{i=2}^4\sum_{j=1}^{2}c_{i,j}(t)\right\}
 \right)\]</span></p>
 <p>where <span class="math inline">\(c_{i,j}\)</span> indicates the
@@ -180,7 +191,7 @@ for each.</p>
 unreduced gametes at rates set by <span class="math inline">\(b\)</span>
 and <span class="math inline">\(cc\)</span> (or <span class="math inline">\(v\)</span>). Of the gametes produced, not all are
 viable. Diploids produce 1n and 2n gametes, both of which are viable.
-Triploids only produce viable gametes of 3n, with unviable 1n and 2n
+Triploids only produce viable gametes of 3n, with nonviable 1n and 2n
 gametes. Autotetraploids produce only viable 2n gametes.</p>
 <p><img src="img/Reproduction01.jpg" width="420" style="display: block; margin: auto;"><strong>Figure 3</strong>: Gametes produced by each cytotype. Here
 gam.vec indicates the <span class="math inline">\(X_{i}\)</span> at a
@@ -191,19 +202,17 @@ Figure A1 in Gaynor et al. 2023.</p>
 </div>
 </div>
 <div class="section level2">
-<h2 id="gamete-mixing">Gamete Mixing<a class="anchor" aria-label="anchor" href="#gamete-mixing"></a>
+<h2 id="gamete-union">Gamete Union<a class="anchor" aria-label="anchor" href="#gamete-union"></a>
 </h2>
 <p>The remaining parameters are associated with selfing rate (<span class="math inline">\(s\)</span>) and mating choice (<span class="math inline">\(mc\)</span>).</p>
 <p><img src="img/FigureS1.jpg" width="1543" style="display: block; margin: auto;"><strong>Figure 4</strong>: Figure A1 in Gaynor et al. 2023. This is a
-visual display of reproduction including gamete formation (<span class="math inline">\(gam.vec\)</span>, <span class="math inline">\(b\)</span>, and <span class="math inline">\(v\)</span>) and the pairing of gametes via sexual
-or asexual reproduction (<span class="math inline">\(s\)</span> and
-<span class="math inline">\(mc\)</span>). The number of gametes of each
-type is calculated based on the number of mature individuals of each
-cytotype (<span class="math inline">\(c_{2,2}, c_{3,2},
-c_{4,2}\)</span>), the number of gametes produced by each individual
-(<span class="math inline">\(gam.vec\)</span>), the frequency of
-unreduced gamete formation (<span class="math inline">\(b\)</span>), and
-the proportion triploid gametes that will be viable (<span class="math inline">\(v\)</span>, or <span class="math inline">\(cc\)</span>). After gamete formation, asexual
+visual display of reproduction including gamete formation (<span class="math inline">\(gam.vec\)</span>, <span class="math inline">\(b\)</span>, and <span class="math inline">\(v\)</span>) and the union of gametes via selfing
+or outcrossing (<span class="math inline">\(s\)</span> and <span class="math inline">\(mc\)</span>). The number of gametes of each type
+is calculated based on the number of mature individuals of each cytotype
+(<span class="math inline">\(c_{2,2}, c_{3,2}, c_{4,2}\)</span>), the
+number of gametes produced by each individual (<span class="math inline">\(gam.vec\)</span>), the frequency of unreduced
+gamete formation (<span class="math inline">\(b\)</span>), and the
+proportion triploid gametes that will be viable (<span class="math inline">\(v\)</span>, or <span class="math inline">\(cc\)</span>). After gamete formation, asexual
 reproduction via selfing will occur based on a defined selfing rate
 (<span class="math inline">\(s\)</span>), the remaining gametes will
 outcross. Of these outcrossing gametes, a proportion will only pair with
@@ -214,7 +223,7 @@ outcrossing pool.</p>
 </h3>
 <p>Note, we included a parameter called ‘mate.lazy’ which can be equal
 to TRUE or FALSE. When FALSE, this prevents selfing from occurring
-during outcrossing. Since preventing pairing of gametes produced by the
+during outcrossing. Since preventing union of gametes produced by the
 same individual increases computational time by 31x, we provide a
 function without this feature. We do not recommend lazy mating.</p>
 </div>

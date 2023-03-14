@@ -13,9 +13,9 @@ Here we describe the parameters associated with immature and mature survival.
 
 | In-text | In-code |    Definition        | 
 |:--------:|:--------:|:-------------------------------------|
-|$\color{red}{a_{i,i}}$ |$\color{red}{aii.vec}$ | Cytotype-specific immature survival probability 	|
-|$\color{red}{\mu}$ | $\color{red}{as.msurv}$	| Mean mature survival probability 	|
-|$\color{red}{ci}$| $\color{red}{env.ci}$		| Proportion of environmental variance|
+|$\color{red}{a_{i,i}}$ |$\color{red}{aii.vec}$ | Survival probability of an immature individual for each cytotype.  	|
+|$\color{red}{\mu}$ | $\color{red}{as.msurv}$	| Survival probability of an mature individual for each cytotype. 	|
+|$\color{red}{ci}$| $\color{red}{env.ci}$		| Proportion of environmental variance used to define mature survival rate per generation.|
                                                                 
 
 ## Immature survival  
