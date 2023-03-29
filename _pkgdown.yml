@@ -1,6 +1,8 @@
 url: http://mlgaynor.com/AutoPop/
 template:
   bootstrap: 5
+  params:
+    ganalytics: G-42F6MNFQGQ
 reference:
 - title: Simulating data with AutoPop
   desc: |
