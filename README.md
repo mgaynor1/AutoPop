@@ -16,7 +16,7 @@ R-based joint-dynamic population simulation for diploids, triploids, and autotet
 ## Installation
 
 ```
-install.packages(devtools)
+install.packages("devtools"")
 devtools::install_github("mgaynor1/AutoPop")
 ```
 
