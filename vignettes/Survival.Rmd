@@ -78,7 +78,7 @@ Mature probability of survival was defined using a beta distribution to sample m
 
 We can define $\alpha$ and $\beta$ based on $\mu$ and $env.ci$ by first defining variance as $\sigma^{2} = ci*\mu(1-\mu)$, then $\alpha = \mu * \frac{\mu*(1-\mu)}{(\sigma^{2} - 1)}$ and $\beta = (1-\mu)*\frac{\mu*(1-\mu)}{(\sigma^{2} - 1)}$. 
 
-Note,  $0 \le env.ci < 1$, see Gaynor et al. 2023 for details. As env.ci increases, we see the variance in probability of survival also increase (**Figure 2**). Additionally, as the mature survival increase, so does the sampled probability of survival.
+Note,  $0 \le env.ci < 1$, see [Gaynor et al. 2023](https://doi.org/10.1101/2023.03.29.534764) for details. As env.ci increases, we see the variance in probability of survival also increase (**Figure 2**). Additionally, as the mature survival increase, so does the sampled probability of survival.
   
 
 ```{r mature, echo=FALSE, fig.align='center', fig.height = 8, fig.width = 8}
