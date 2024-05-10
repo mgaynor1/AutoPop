@@ -11,7 +11,7 @@
 
 ## Introduction   
 
-R-based joint-dynamic population simulation for diploids, triploids, and autotetraploids. For details on these methods, see [Gaynor et al. 2023](https://doi.org/10.1101/2023.03.29.534764). To summarize, this package contains a stochastic stage-structured matrix population dynamics model for diploid, triploid, and autotetraploid perennial plants with overlapping generations and two life-stages (reproductively immature and reproductively mature). Stay-tune for v2.0.0, which will include population genetic simulations. 
+R-based joint-dynamic population simulation for diploids, triploids, and autotetraploids. For details on these methods, see [Gaynor et al. Preprint](https://doi.org/10.1101/2023.03.29.534764). To summarize, this package contains a stochastic stage-structured matrix population dynamics model for diploid, triploid, and autotetraploid perennial plants with overlapping generations and two life-stages (reproductively immature and reproductively mature). Stay-tune for v2.0.0, which will include population genetic simulations. 
 
 ## Installation
 

@@ -7,7 +7,7 @@
 alphabeta.calc(mu, var)
 }
 \arguments{
-\item{mu}{Mean probability of mature survival. Must be a single integer between 0 and 1.}
+\item{mu}{Sample mean. Must be a single integer between 0 and 1.}
 
 \item{var}{Derived variance based on var.option. Must be a single integer between 0 and 1.}
 }
@@ -15,5 +15,6 @@ alphabeta.calc(mu, var)
 List with the parameters alpha and beta.
 }
 \description{
-Calculates the alpha and beta parameters based on mu, the mean probability of mature survival, and the calculated variance.
+Calculates the alpha and beta parameters based on mu, here the mean probability of mature survival,
+and s calculated variance.
 }

@@ -28,6 +28,9 @@ reference:
   - muvar.calc
   - var.option
   - form.autopop
+  - env.copula
+  - mu.options
+  - surv.shape
 articles:
 - title: AutoPop
   navbar: ~

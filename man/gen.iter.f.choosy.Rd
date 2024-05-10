@@ -8,6 +8,7 @@ gen.iter.f.choosy(
   generations,
   init.pop,
   env.ci,
+  env.sigma,
   aii.vec,
   as.matur,
   as.msurv,
@@ -17,8 +18,13 @@ gen.iter.f.choosy(
   cc,
   s,
   mc,
-  density.type = "all",
-  mate.lazy = FALSE
+  gam.density.type = "all",
+  is.density.type = "all",
+  rho,
+  mate.lazy = FALSE,
+  rj = c(1, 1),
+  yj = c(1, 1),
+  env.immature.survival = FALSE
 )
 }
 \arguments{
@@ -29,9 +35,11 @@ gen.iter.f.choosy(
 \item{env.ci}{Proportion of environmental variance used to define mature survival rate per generation.
 Must be an integer greater than or equal to 0 and less than 1.}
 
-\item{aii.vec}{The survival probability of an immature individual for each cytotype. Must be a list of three integers between 0 and 1. For example, \code{aii.vec = c(0.5, 0.3, 0.5)}.}
+\item{env.sigma}{Sigma value to define environmental variance corresponding to immature survival rate per generation.}
 
-\item{as.matur}{The probability of maturation from an immature stage to the mature stage for each cytotype. Must be a list of three integers between 0 and 1. For example, \code{as.matur = c(0.5, 0.3, 0.5)}.}
+\item{aii.vec}{The survival probability of an immature individual for each cytotype. Must be a list of three integers between 0 and 1. For example, \code{aii.vec = c(0.0005, 0.005, 0.0005)}.}
+
+\item{as.matur}{The probability of maturation from an immature stage to the mature stage for each cytotype. Must be a list of three integers between 0 and 1. For example, \code{as.matur = c(0.60, 0.06, 0.60)}.}
 
 \item{as.msurv}{The mean survival probability of a mature individual for each cytotype.
 Must be a list of three integers between 0 and 1. For example, \code{as.msurv = c(0.5, 0.3, 0.5)}.}
@@ -50,11 +58,26 @@ Must be a single integer between 0 and 1.}
 
 \item{mc}{Strength of mating choice. Must be a single integer between 0 and 1.}
 
-\item{density.type}{Default = "all", this sets the density at time t as all individuals at time t.
+\item{gam.density.type}{Default = "all", this sets the density dependence type for number of gametes produced at time t as all individuals at time t.
 Alternatively, "like-cytotype" sets the density at time t for each cytotype based on only the total immature and mature individuals
 of that cytotype at time t.}
 
+\item{is.density.type}{Default = "all", this sets the density dependence type for immature surivival at time t as all individuals at time t.
+Alternatively, "like-cytotype" sets the density at time t for each cytotype based on only the total immature and mature individuals
+of that cytotype at time t.}
+
+\item{rho}{Correlation coefficient. Must be a single integer between 0 and 1.}
+
 \item{mate.lazy}{Default = FALSE, this prevents selfing from occurring during outcrossing. However, this increases the computational time by 31x!}
+
+\item{rj}{List of two indicates the stage dependent density dependent impact of immature and mature individuals on  number of gametes produced. Default is c(1,1).}
+
+\item{yj}{List of two indicates the stage dependent density dependent impact of immature and mature individuals on the probability of immature survival. Default is c(1,1).}
+
+\item{env.immature.survival}{Default = FALSE. When FALSE, the mean immature survival rate is equal to the exponential of the inverse
+immature survival rate (\code{aii}) times the sum of immature individuals and mature individuals of the cytotype indicated by \code{is.density.type},
+which may be modified by \code{yj}. When this variable equals TRUE, the previous mean, or the immature determinate survival rate, is transformed
+by log(mu/(1-mu)) and the Johnson SB distribution is sampled given the \code{env.sigma} and \code{Xi.is} (defined in \code{gen.iter.f.choosy()}).}
 }
 \value{
 A single data frame as defined by \code{form.autopop()}. Each row is a generation. The columns are as follows,
@@ -85,6 +108,12 @@ A single data frame as defined by \code{form.autopop()}. Each row is a generatio
 \item C2: relative abundance of all diploids (sum2x/sum).
 \item C3: relative abundance of all triploids (sum3x/sum).
 \item C4: relative abundance of all tetraploids (sum4x/sum)
+\item i1e: diploid immature survival probability during t - 1.
+\item i2e: triploid immature survival probability during t - 1.
+\item i3e: tetraploid immature survival probability during t - 1.
+\item m1e: diploid mature survival probability during t - 1.
+\item m2e: triploid mature survival probability during t - 1.
+\item m3e: tetraploid mature survival probability during t - 1.
 }
 }
 \description{

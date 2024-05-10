@@ -15,19 +15,26 @@ one.iter.f.choosy(
   b,
   cc,
   mc,
-  density.type = "all",
-  mate.lazy = FALSE
+  gam.density.type,
+  is.density.type,
+  mate.lazy = FALSE,
+  rj = c(1, 1),
+  yj = c(1, 1),
+  env.sigma,
+  Xi.is,
+  env.immature.survival
 )
 }
 \arguments{
 \item{ct.vec}{Population composition at time t.
 Indicates the sum of each type at time t, \verb{ct.vec = c(2x_immature, 3x_immature, 4x_immature, 2x_mature, 3x_mature, 4x_mature)}}
 
-\item{aii.vec}{The survival probability of an immature individual for each cytotype. Must be a list of three integers between 0 and 1. For example, \code{aii.vec = c(0.5, 0.3, 0.5)}.}
+\item{aii.vec}{The survival probability of an immature individual for each cytotype. Must be a list of three integers between 0 and 1. For example, \code{aii.vec = c(0.0005, 0.005, 0.0005)}.}
 
-\item{as.matur}{The probability of maturation from an immature stage to the mature stage for each cytotype. Must be a list of three integers between 0 and 1. For example, \code{as.matur = c(0.5, 0.3, 0.5)}.}
+\item{as.matur}{The probability of maturation from an immature stage to the mature stage for each cytotype. Must be a list of three integers between 0 and 1. For example, \code{as.matur = c(0.60, 0.06, 0.60)}.}
 
-\item{as.msurv.e.set}{The survival probability of a mature individual for each cytotype. Must be a list of three integers between 0 and 1. For example, \code{as.msurv.e.set = c(0.5, 0.3, 0.5)}.
+\item{as.msurv.e.set}{The survival probability of a mature individual for each cytotype. Must be a list of three integers between 0 and 1. These are defined based on user supplied
+mean probability of mature survival (\code{as.msurv}), proportion of environmental variance (\code{env.ci}),
 This list is defined within the \code{gen.iter.f.choosy()} function.}
 
 \item{d}{Strength of density dependency on gamete production for each cytotype. Must be a list of three integers between 0 and 1. For example, \code{d = c(0.001, 0.009, 0.001)}.}
@@ -44,16 +51,36 @@ Must be a single integer between 0 and 1.}
 
 \item{mc}{Strength of mating choice. Must be a single integer between 0 and 1.}
 
-\item{density.type}{Default = "all", this sets the density at time t as all individuals at time t.
+\item{gam.density.type}{Default = "all", this sets the density dependence type for number of gametes produced at time t as all individuals at time t.
+Alternatively, "like-cytotype" sets the density at time t for each cytotype based on only the total immature and mature individuals
+of that cytotype at time t.}
+
+\item{is.density.type}{Default = "all", this sets the density dependence type for immature surivival at time t as all individuals at time t.
 Alternatively, "like-cytotype" sets the density at time t for each cytotype based on only the total immature and mature individuals
 of that cytotype at time t.}
 
 \item{mate.lazy}{Default = FALSE, this prevents selfing from occurring during outcrossing. However, this increases the computational time by 31x!}
+
+\item{rj}{List of two indicates the stage dependent density dependent impact of immature and mature individuals on  number of gametes produced. Default is c(1,1).}
+
+\item{yj}{List of two indicates the stage dependent density dependent impact of immature and mature individuals on the probability of immature survival. Default is c(1,1).}
+
+\item{env.sigma}{Sigma value to define environmental variance corresponding to immature survival rate per generation.}
+
+\item{Xi.is}{Sample from a multivariate normal distribution. Allows immature and mature survival probabilities be correlated,
+as well as allowing for a correlation among cytotypes based on a supplied \code{rho} value.}
+
+\item{env.immature.survival}{Default = FALSE. When FALSE, the mean immature survival rate is equal to the exponential of the inverse
+immature survival rate (\code{aii}) times the sum of immature individuals and mature individuals of the cytotype indicated by \code{is.density.type},
+which may be modified by \code{yj}. When this variable equals TRUE, the previous mean, or the immature determinate survival rate, is transformed
+by log(mu/(1-mu)) and the Johnson SB distribution is sampled given the \code{env.sigma} and \code{Xi.is} (defined in \code{gen.iter.f.choosy()}).}
 }
 \value{
-List of 9, with 1:6 representing the number of individuals of each cytotype
-and at both stages at time t + 1. Items 7:9 are the number of gametes sampled for
-2x, 3x, and 4x individuals at time t.
+List of 15, with 1:6 representing the number of individuals of each cytotype
+and at both stages at time t + 1. Items 7:9 are the number of offspring generated for
+2x, 3x, and 4x individuals at time t. Items 10:12 are the number of gametes generated from
+2x, 3x, and 4x individuals at time t. Items 12:15 are the immature survival probabilities
+at time t.
 }
 \description{
 Defined in detail in \url{Gaynor et al. 2023}. To summarize,

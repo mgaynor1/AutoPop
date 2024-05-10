@@ -14,5 +14,6 @@
 
 var.option <- function(env.ci, mu){
   var <- (env.ci*mu*(1-mu))
+  #var <- max(var, .Machine$double.xmin)
   return(var)
 }

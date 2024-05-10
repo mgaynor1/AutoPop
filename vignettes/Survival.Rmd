@@ -3,7 +3,6 @@ title: "Survival"
 output:
   html_document:
     df_print: paged
- 
 ---
 
 Here we describe the parameters associated with immature and mature survival.
@@ -13,63 +12,91 @@ Here we describe the parameters associated with immature and mature survival.
 
 | In-text | In-code |    Definition        | 
 |:--------:|:--------:|:-------------------------------------|
-|$\color{red}{a_{i,i}}$ |$\color{red}{aii.vec}$ | Survival probability of an immature individual for each cytotype.  	|
+|$\color{red}{\rho}$ |$\color{red}{rho}$ | Rank correlation between surivival of different cytotypes.|
+|$\color{red}{a_{i}}$ |$\color{red}{aii.vec}$ | Cytotype-specific response to competition related to immature survival.|
+|$\color{red}{\alpha_{i,k}}$|$\color{red}{is.density.type}$ | Type-specific density dependence. Competitive effect of cytotype $k$ on cytotype $i$'s survival. Options: "all" or "like-cytotype". When equal to "all", $\alpha_{i,k} = 1$. Similarly, when equal to "like-cytotype", $\alpha_{i,k} = 0$ | 
+|$\color{red}{y_{j}}$| $\color{red}{yj}$| Stage-specific density dependence. |
+||$\color{red}{env.immature.survival}$| Allows environmental stochasticity to influences immature survival. Defaults as "TRUE"|
+|$\color{red}{\sigma}$|$\color{red}{env.sigma}$| Proportion of environmental variance for immature individual. |
 |$\color{red}{\mu}$ | $\color{red}{as.msurv}$	| Survival probability of an mature individual for each cytotype. 	|
-|$\color{red}{ci}$| $\color{red}{env.ci}$		| Proportion of environmental variance used to define mature survival rate per generation.|
+|$\color{red}{ci}$| $\color{red}{env.ci}$		| Proportion of environmental variance used to define mature survival rate per generation.	|
                                                                 
 
 ## Immature survival  
+Immature survival is defined as:
+$$\hat{s}_{i,1}(t) = \frac{e^{\mu_{i,1}}}{1+e^{\mu_{i,1}}} = \text{exp}\left\{-a_i\sum_{k=2}^{4}\alpha_{i,k} \sum_{j=1}^{2}y_jc_{i,k}(t)\right\}$$
 
-Immature probability of survival was defined as followed:
-     
-$$S_{i, 1}(t) = e^{-aii[j]*\sum_{j=1}^{2}c_{i,j}(t)}$$
-Where $c_{i, 1}(t + 1)$ is defined by a binominal distribution with $c_{i,1}(t)$ trials and probability of success equal to $S_{i,1}(t)$. As aii increases, the number of individuals expected to survive decreases (**Figure 1**).   
+where $\mu_{i,1}$ is the logs-odd survival, ${y_{j}}$ is the stage-specific density dependency, $a_i$ is the cytotype-specific response to competition related to immature survival, $\alpha_{i,k}$ is type-specific density dependence, and $c_{i,k}$ is the number of individuals of cytotype k (k = \{2, 3, 4\}) and stage j (j = = \{1,2\}).
+
+As aii increases, the probability of survival decreases at a lower population size (**Figure 1**). When $\sigma$ increases, environmental variance increases.  Therefore, $\sigma$ (env.sigma) increases, the propability of survival becomes more variable. 
 
 
-```{r immature, echo=FALSE, fig.align='center', fig.height = 10, fig.width = 8}
+
+```{r immature, echo=FALSE, fig.align='center', fig.height = 15, fig.width = 8}
+library(ggplot2)
+source("../R/env.copula.R")
+Xi.is <- (env.copula(0, 2000))[[1]]
+imsurv <- function(isval, env.sigma){
+   isout <- c() 
+   for(i in 1:2000){
+    immature.det.surv <-  exp(-isval*poploop[i])
+    immature.mu <- log(immature.det.surv/(1-immature.det.surv))
+     as.isurv <- (exp(immature.mu + (env.sigma*Xi.is[i]))/(1 + exp(immature.mu + (env.sigma*Xi.is[i]))))
+      isout[i] <- as.isurv
+   #isout[i] <-  rbinom(n = 1, size = poploop[i], prob = as.isurv)
+}
+      return(data.frame(popsize = poploop, out = as.numeric(isout), env.sigma =  env.sigma, val = paste0("aii = ", isval)))
+}
+
 poploop <- seq(10, 100000, by = 50)
 
 
 is1 <- 0.00001
-is1out <- c()
+is1out <- imsurv(is1, 1)
+is1outb <- imsurv(is1, 25)
+is1outc <- imsurv(is1, 50)
+is1outall <- rbind(is1out, is1outb, is1outc)
 is2 <- 0.00005
-is2out <- c()
+is2out <- imsurv(is2, 1)
+is2outb <- imsurv(is2, 25)
+is2outc <- imsurv(is2, 50)
 is3 <- 0.0001
-is3out <- c()
+is3out <- imsurv(is3, 1)
+is3outb <- imsurv(is3, 25)
+is3outc <- imsurv(is3, 50)
 is4 <- 0.0005
-is4out <- c()
+is4out <- imsurv(is4, 1)
+is4outb <- imsurv(is4, 25)
+is4outc <- imsurv(is4, 50)
 is5 <- 0.001
-is5out <- c()
+is5out <- imsurv(is5, 1)
+is5outb <- imsurv(is5, 25)
+is5outc <- imsurv(is5, 50)
+is6 <- 0.005
+is6out <- imsurv(is6, 1)
+is6outb <- imsurv(is6, 25)
+is6outc <- imsurv(is6, 50)
 
-for(i in 1:200){
-  is1out[i] <- rbinom(n = 1, size = poploop[i], prob = exp(-is1*poploop[i]))
-  is2out[i] <- rbinom(n = 1, size = poploop[i], prob = exp(-is2*poploop[i]))
-  is3out[i] <- rbinom(n = 1, size = poploop[i], prob = exp(-is3*poploop[i]))
-  is4out[i] <- rbinom(n = 1, size = poploop[i], prob = exp(-is4*poploop[i]))
-  is5out[i] <- rbinom(n = 1, size = poploop[i], prob = exp(-is5*poploop[i]))
-}
+isoutall <- rbind(is1out, is1outb, is1outc, 
+                   is2out, is2outb,is2outc, 
+                   is3out, is3outb, is3outc,
+                   is4out, is4outb, is4outc,
+                   is5out, is5outb, is5outc, 
+                  is6out, is6outb, is6outc)
+isoutall$val <- factor(isoutall$val, levels =c("aii = 0.001", "aii = 0.005", "aii = 0.0001", "aii = 0.0005", "aii = 0.00001", "aii = 0.00005"))
+options(scipen=999)
 
-is1_plot <- data.frame(popsize = poploop, out = is1out)
-is2_plot <- data.frame(popsize = poploop, out = is2out)
-is3_plot <- data.frame(popsize = poploop, out = is3out)
-is4_plot <- data.frame(popsize = poploop, out = is4out)
-is5_plot <- data.frame(popsize = poploop, out = is5out)
-
-par(mfrow = c(5, 1), mar=c(2,2,2,2))
-plot(x = is1_plot$popsize, y = is1_plot$out, col = "red", pch = 16, type = "b",
-     xlab = "Population Size",  ylab = "survival", main="aii = 0.00001", xlim = c(0, 100050), ylim = c(0, 10000))
-plot(x = is2_plot$popsize, y = is2_plot$out, col = "red", pch = 16, type = "b",
-     xlab = "Population Size",  ylab = "survival", main="aii = 0.00005", xlim = c(0, 100050), ylim = c(0, 10000))
-plot(x = is3_plot$popsize, y = is3_plot$out, col = "red", pch = 16, type = "b",
-     xlab = "Population Size",  ylab = "survival", main="aii = 0.0001", xlim = c(0, 100050), ylim = c(0, 10000))
-plot(x = is4_plot$popsize, y = is4_plot$out, col = "red", pch = 16, type = "b",
-     xlab = "Population Size",  ylab = "survival", main="aii = 0.0005", xlim = c(0, 100050), ylim = c(0, 10000))
-plot(x = is5_plot$popsize, y = is5_plot$out, col = "red", pch = 16, type = "b",
-     xlab = "Population Size",  ylab = "survival", main="aii = 0.001", xlim = c(0, 100050), ylim = c(0, 10000))
+ggplot(isoutall, aes(x = popsize, y = out, col = factor(env.sigma)))+
+  geom_point(alpha = 0.9) +
+  scale_color_manual(values = c("blue", "purple", "red")) +
+  facet_wrap(factor(val) ~ factor(env.sigma), nrow = 6, ncol = 3) +
+  labs(color = "env.sigma") +
+  xlab("Population Size") +
+  ylab("Survival Probability")
 
 
 ```
-**Figure 1**: Expected number of individuals to survive given different immature survival probabilities.
+**Figure 1**: Probability of survival as a function of population size and environmental variance. 
 
 <br>
 
@@ -85,11 +112,13 @@ Note,  $0 \le env.ci < 1$, see [Gaynor et al. 2023](https://doi.org/10.1101/2023
 source("../R/mature.surv.calc.R")
 source("../R/var.option.R")
 source("../R/alphabeta.calc.R")
+source("../R/surv.shape.R")
 envi.ci.list <- seq(0.05, 0.95, by = 0.05) 
 as.msurv.list <- seq(0.05, 0.95, by = 0.05)
 
 out.set.me <-  matrix(nrow = (19*21), ncol = 3)
 klist <- list()
+Ui.vec <- (env.copula(0, 2000))[[2]]
 
 out.set.list <- list()
 for(k in 1:100){
@@ -102,7 +131,9 @@ for(i in 1:19){
     out.set.list[[k]][c, 1] <- env.ci[1]
     as.msurv <- as.msurv.list[j]
     out.set.list[[k]][c, 2] <- as.msurv
-    out.set.list[[k]][c, 3] <-  mature.surv.calc(env.ci = env.ci, as.msurv = as.msurv)
+    msurv.alpha.beta <- surv.shape(env.ci = env.ci, raw.means = as.msurv)
+           out.set.list[[k]][c, 3] <- qbeta(Ui.vec[k,1], msurv.alpha.beta[1,1], msurv.alpha.beta[2,1])
+    #out.set.list[[k]][c, 3] <-  mature.surv.calc(env.ci = env.ci, as.msurv = as.msurv)
 
   }
 }
@@ -115,11 +146,15 @@ ggplot(out.set.me.df, aes(x = V2, y = V3, col = V1)) +
   geom_point() +
   #geom_line() +
   xlab("Mature Survival Probability") +
-  ylab("Sampled Probability of Survival") +
+  ylab("Probability of Survival") +
   facet_wrap(~V1)
-  
+
+
+
+
 
 ```
 **Figure 2**: Expected survival probability when we sample a beta distribution based on the mean mature survival probability ($\mu$) (x-axis) and  proportion of variance ($env.ci$) (plot title).
+
 
 

@@ -26,10 +26,10 @@
 #' * C2: relative abundance of all diploids (ie. sum2x/sum).
 #' * C3: relative abundance of all triploids (ie. sum3x/sum).
 #' * C4: relative abundance of all tetraploids (ie. sum4x/sum)
-#'
+
 
 form.autopop <- function(popvect, generations){
-    plot.pop <- as.data.frame(do.call(rbind, popvect))
+    plot.pop <- as.data.frame(do.call(rbind, popvect))[,1:12]
     plot.pop$gen <- 1:(generations + 1)
     plot.pop[is.na(plot.pop)] = 0
 

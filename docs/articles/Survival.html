@@ -8,8 +8,8 @@
 <meta name="description" content="AutoPop">
 <title>Survival • AutoPop</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Survival">
 <meta property="og:description" content="AutoPop">
@@ -32,7 +32,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">AutoPop</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0.0000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -96,18 +96,51 @@ survival.</p>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="center"><span class="math inline">\(\color{red}{a_{i,i}}\)</span></td>
-<td align="center"><span class="math inline">\(\color{red}{aii.vec}\)</span></td>
-<td align="left">Survival probability of an immature individual for each
-cytotype.</td>
+<td align="center"><span class="math inline">\(\color{red}{\rho}\)</span></td>
+<td align="center"><span class="math inline">\(\color{red}{rho}\)</span></td>
+<td align="left">Rank correlation between surivival of different
+cytotypes.</td>
 </tr>
 <tr class="even">
+<td align="center"><span class="math inline">\(\color{red}{a_{i}}\)</span></td>
+<td align="center"><span class="math inline">\(\color{red}{aii.vec}\)</span></td>
+<td align="left">Cytotype-specific response to competition related to
+immature survival.</td>
+</tr>
+<tr class="odd">
+<td align="center"><span class="math inline">\(\color{red}{\alpha_{i,k}}\)</span></td>
+<td align="center"><span class="math inline">\(\color{red}{is.density.type}\)</span></td>
+<td align="left">Type-specific density dependence. Competitive effect of
+cytotype <span class="math inline">\(k\)</span> on cytotype <span class="math inline">\(i\)</span>’s survival. Options: “all” or
+“like-cytotype”. When equal to “all”, <span class="math inline">\(\alpha_{i,k} = 1\)</span>. Similarly, when equal
+to “like-cytotype”, <span class="math inline">\(\alpha_{i,k} =
+0\)</span>
+</td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(\color{red}{y_{j}}\)</span></td>
+<td align="center"><span class="math inline">\(\color{red}{yj}\)</span></td>
+<td align="left">Stage-specific density dependence.</td>
+</tr>
+<tr class="odd">
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\color{red}{env.immature.survival}\)</span></td>
+<td align="left">Allows environmental stochasticity to influences
+immature survival. Defaults as “TRUE”</td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(\color{red}{\sigma}\)</span></td>
+<td align="center"><span class="math inline">\(\color{red}{env.sigma}\)</span></td>
+<td align="left">Proportion of environmental variance for immature
+individual.</td>
+</tr>
+<tr class="odd">
 <td align="center"><span class="math inline">\(\color{red}{\mu}\)</span></td>
 <td align="center"><span class="math inline">\(\color{red}{as.msurv}\)</span></td>
 <td align="left">Survival probability of an mature individual for each
 cytotype.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="center"><span class="math inline">\(\color{red}{ci}\)</span></td>
 <td align="center"><span class="math inline">\(\color{red}{env.ci}\)</span></td>
 <td align="left">Proportion of environmental variance used to define
@@ -118,15 +151,24 @@ mature survival rate per generation.</td>
 <div class="section level2">
 <h2 id="immature-survival">Immature survival<a class="anchor" aria-label="anchor" href="#immature-survival"></a>
 </h2>
-<p>Immature probability of survival was defined as followed:</p>
-<p><span class="math display">\[S_{i, 1}(t) =
-e^{-aii[j]*\sum_{j=1}^{2}c_{i,j}(t)}\]</span> Where <span class="math inline">\(c_{i, 1}(t + 1)\)</span> is defined by a binominal
-distribution with <span class="math inline">\(c_{i,1}(t)\)</span> trials
-and probability of success equal to <span class="math inline">\(S_{i,1}(t)\)</span>. As aii increases, the number
-of individuals expected to survive decreases (<strong>Figure
-1</strong>).</p>
-<p><img src="Survival_files/figure-html/immature-1.png" width="768" style="display: block; margin: auto;"><strong>Figure 1</strong>: Expected number of individuals to survive
-given different immature survival probabilities.</p>
+<p>Immature survival is defined as: <span class="math display">\[\hat{s}_{i,1}(t) =
+\frac{e^{\mu_{i,1}}}{1+e^{\mu_{i,1}}} =
+\text{exp}\left\{-a_i\sum_{k=2}^{4}\alpha_{i,k}
+\sum_{j=1}^{2}y_jc_{i,k}(t)\right\}\]</span></p>
+<p>where <span class="math inline">\(\mu_{i,1}\)</span> is the logs-odd
+survival, <span class="math inline">\({y_{j}}\)</span> is the
+stage-specific density dependency, <span class="math inline">\(a_i\)</span> is the cytotype-specific response to
+competition related to immature survival, <span class="math inline">\(\alpha_{i,k}\)</span> is type-specific density
+dependence, and <span class="math inline">\(c_{i,k}\)</span> is the
+number of individuals of cytotype k (k = {2, 3, 4}) and stage j (j = =
+{1,2}).</p>
+<p>As aii increases, the probability of survival decreases at a lower
+population size (<strong>Figure 1</strong>). When <span class="math inline">\(\sigma\)</span> increases, environmental variance
+increases. Therefore, <span class="math inline">\(\sigma\)</span>
+(env.sigma) increases, the propability of survival becomes more
+variable.</p>
+<p><img src="Survival_files/figure-html/immature-1.png" width="768" style="display: block; margin: auto;"><strong>Figure 1</strong>: Probability of survival as a function of
+population size and environmental variance.</p>
 <p><br></p>
 </div>
 <div class="section level2">

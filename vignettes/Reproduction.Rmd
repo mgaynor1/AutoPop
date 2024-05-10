@@ -18,27 +18,29 @@ Here we describe the parameters associated with reproduction and how these param
 
 | In-text | In-code |    Definition        | 
 |:--------:|:--------:|:-------------------------------------|
-|$\color{green}{\lambda_{i}}$  |$\color{green}{gnum.base}$   | Mean number of gametes per individual per cytotype.   |         |
-|$\color{green}{d}$ | $\color{green}{d}$ |   	Strength of density dependency on gamete production for each cytotype. 	 |
-||$\color{green}{density.type}$ | Sets type of density dependency utilized when defining number of gametes per individual. Options: "all" or "like-cytotype".|  
-|$\color{green}{b}$    |$\color{green}{b}$ | Proportion of unreduced gamete formed by each diploid and tetraploid individual.|    
-|$\color{green}{v}$ |$\color{green}{cc}$  |Proportion of 3n gamete formation from each triploid individual.  		|
+|$\color{green}{\lambda_{i}}$  |$\color{green}{gnum.base}$   | Mean number of gametes per individual per cytotype.     |
+|$\color{green}{d_{i}}$ | $\color{green}{d}$ |   	Strength of density dependency on gamete production for each cytotype.|
+|$\color{green}{r_{j}}$ | $\color{green}{rj}$ |   	Stage-specific density dependence.	 |
+|$\color{green}{\gamma_{i,k}}$|$\color{green}{gam.density.type}$ | Type-specific density dependence.Competitive effect of cytotype $k$ on cytotype $i$'s reproduction. Options: "all" or "like-cytotype". When equal to "all", $\gamma_{i,k} = 1$. Similarly, when equal to "like-cytotype", $\gamma_{i,k} = 0$ | 
+|$\color{green}{b}$    |$\color{green}{b}$ | Proportion of unreduced gamete formed by each diploid and tetraploid individual.|
+|$\color{green}{v}$ |$\color{green}{cc}$  | Proportion of 3n gamete formation from each triploid individual. 		|
 |$\color{green}{s}$|$\color{green}{s}$ 	|Selfing rate.      |
-|$\color{green}{mc}$ | $\color{green}{mc}$ |Strength of mating choice. 	|
-||$\color{green}{mate.lazy}$ | Prevents selfing from occurring during outcrossing.|
-                                                                                  
+|$\color{green}{mp}$ | $\color{green}{mc}$ | Strength of mating proportion. 	|
+| | $\color{green}{mate.lazy}$ | Prevents selfing from occurring during outcrossing.| 
+                                                                       
                                                                                   
                                                                                   
 ## Gamete Formation                                                                   
 ### Number of Gametes Produced   
-The number of gametes per individual of each cytotype at each time step ($X_{i}(t)$) is determined based on the base number of gametes per individual ($gnum.base$) and the strength of density dependency ($d$).   
-    
-$$X_{i}(t) \sim {\rm Poisson} \left(gnum*\exp\left\{-d_{i}\sum_{i=2}^4\sum_{j=1}^{2}c_{i,j}(t)\right\} \right)$$
+The number of gametes per individual of each cytotype at each time step ($X_{i}(t)$) is determined based on the base number of gametes per individual ($gnum.base$ or $\lambda$) and the strength of density dependency ($d$).   
+
+When all cytotypes impact the number of gametes produced, this is defined as 
+$$X_{i}(t) \sim {\rm Poisson} \left(\lambda_{i}\exp\left\{-d_{i}\sum_{j=1}^{2}\sum_{k=2}^{4}r_{j} \gamma_{i,k}c_{k,j}(t)\right\} \right)$$
 
 
-where $c_{i,j}$ indicates the total number of individuals of each cytotype (i = \{2, 3, 4\}) and each life stage (j = \{1,2\}).  
+where $c_{k,j}$ indicates the total number of individuals of each cytotype (k = \{2, 3, 4\}) and each life stage (j = \{1,2\}). Here, $r_{j}$  is the stage-specific density dependence. $\gamma_{i,k}$ is the type-specific density dependence effect or the competitive effect of cytotype $k$ on cytotype $i$'s reproduction. In our code, this value is set by $gam.density.type$ equal to "all" or "like-cytotype". When equal to "all", $\gamma_{i,k} = 1$. Similarly, when equal to "like-cytotype", $\gamma_{i,k} = 0$. Here we do not explore values for $r_{j}$ or $\gamma_{i,k}$. 
 
-Here we inspect the number of gametes expected for populations between 10 to 100,000 individuals. We see that minimum population size where 0 gametes are sampled (indicated by colored lines) among the different $gnum.base$ values decreases with increased $d$ values. We also observe that at larger values of $d$ there is a decrease in distance among the minimum population size with 0 gametes sampled for the different $gnum.base$ values. Due to the dynamics revealed in **Figure 1**, we decided to vary the strength of density dependence, rather than the base number of gametes produced (see **Figure 2**).
+Here we inspect the number of gametes expected for populations between 10 to 100,000 individuals, where density dependence is based on total population abundance. We see that minimum population size where 0 gametes are sampled (indicated by colored lines) among the different $gnum.base$ values decreases with increased $d$ values. We also observe that at larger values of $d$ there is a decrease in distance among the minimum population size with 0 gametes sampled for the different $gnum.base$ values. Due to the dynamics revealed in **Figure 1**, we decided to vary the strength of density dependence, rather than the base number of gametes produced (see **Figure 2**).
 
 <br>
 

@@ -69,15 +69,21 @@ $$
 |:--------:|:--------:|:-------------------------------------|
 |$generations$ | $generations$ |	Number of generations to simulate.		| 
 |$init.pop$ |   $init.pop$ 	|  Number of mature diploids in the initial founding population.	 |
-|$\color{green}{gnum}$  |$\color{green}{gnum.base}$   | Mean number of gametes per individual per cytotype.     |
-|$\color{green}{d}$ | $\color{green}{d}$ |   	Strength of density dependency on gamete production for each cytotype.	 |
-||$\color{green}{density.type}$ | Sets type of density dependency utilized when defining number of gametes per individual. Options: "all" or "like-cytotype". | 
+|$\color{green}{\lambda_{i}}$  |$\color{green}{gnum.base}$   | Mean number of gametes per individual per cytotype.     |
+|$\color{green}{d_{i}}$ | $\color{green}{d}$ |   	Strength of density dependency on gamete production for each cytotype.	 |
+|$\color{green}{r_{j}}$ | $\color{green}{rj}$ |   	Stage-specific density dependence.	 |
+|$\color{green}{\gamma_{i,k}}$|$\color{green}{gam.density.type}$ | Type-specific density dependence.Competitive effect of cytotype $k$ on cytotype $i$'s reproduction. Options: "all" or "like-cytotype". When equal to "all", $\gamma_{i,k} = 1$. Similarly, when equal to "like-cytotype", $\gamma_{i,k} = 0$ | 
 |$\color{green}{b}$    |$\color{green}{b}$ | Proportion of unreduced gamete formed by each diploid and tetraploid individual.|
 |$\color{green}{v}$ |$\color{green}{cc}$  | Proportion of 3n gamete formation from each triploid individual. 		|
 |$\color{green}{s}$|$\color{green}{s}$ 	|Selfing rate.      |
-|$\color{green}{mc}$ | $\color{green}{mc}$ | Strength of mating choice.  	|
-||$\color{green}{mate.lazy}$ | Prevents selfing from occurring during outcrossing.| 
-|$\color{red}{a_{i,i}}$ |$\color{red}{aii.vec}$ | Survival probability of an immature individual for each cytotype. 	|
+|$\color{green}{mp}$ | $\color{green}{mc}$ | Strength of mating proportion. 	|
+| |$\color{green}{mate.lazy}$ | Prevents selfing from occurring during outcrossing.| 
+|$\color{red}{\rho}$ |$\color{red}{rho}$ | Rank correlation between surivival of different cytotypes.|
+|$\color{red}{a_{i}}$ |$\color{red}{aii.vec}$ | Cytotype-specific response to competition related to immature survival.|
+|$\color{red}{\alpha_{i,k}}$|$\color{red}{is.density.type}$ | Type-specific density dependence. Competitive effect of cytotype $k$ on cytotype $i$'s survival. Options: "all" or "like-cytotype". When equal to "all", $\alpha_{i,k} = 1$. Similarly, when equal to "like-cytotype", $\alpha_{i,k} = 0$ | 
+|$\color{red}{y_{j}}$| $\color{red}{yj}$| Stage-specific density dependence. |
+||$\color{red}{env.immature.survival}$| Allows environmental stochasticity to influences immature survival. Defaults as "TRUE"|
+|$\color{red}{\sigma}$|$\color{red}{env.sigma}$| Proportion of environmental variance for immature individual. |
 |$\color{red}{\mu}$ | $\color{red}{as.msurv}$	| Survival probability of an mature individual for each cytotype. 	|
 |$\color{red}{ci}$| $\color{red}{env.ci}$		| Proportion of environmental variance used to define mature survival rate per generation.	|
 |$\color{blue}{as.matur}$|$\color{blue}{as.matur}$	| The probability of maturation from an immature stage to the mature stage for each cytotype. 	|                     
@@ -96,16 +102,22 @@ example.sim <- gen.iter.f.choosy(generations = 10000, # Number of generations
                                  init.pop = 100, # Number of mature diploids in initial pop
                                  gnum.base = c(100, 100, 100), # Number of gametes per individual per cytotype
                                  d = c(0.0001, 0.0009, 0.0001), # Strength of density dependency
-                                 density.type = "all", # Type of density dependence
+                                 gam.density.type = "all", # Type of density dependence for gamete production
                                  b = 0.02, # Proportion of unreduced gamete formation
                                  cc = 0.052, # Proportion of 3n gamete formation 
                                  s = 0.1, # Selfing rate
                                  mc = 0.1, # Strength of mating choice
                                  mate.lazy = FALSE, # Prevents selfing from occurring during outcrossing
-                                 env.ci = 0.1, # Proportion of environmental variance
+                                 rho = 0, # correlation coefficient
+                                 rj = c(1,1), # stage specific density dependence on gamete production 
+                                 yj = c(1,1), # stage specific density dependence on immature surivial 
+                                 env.ci = 0.1, # Proportion of environmental variance for mature individuals
+                                 env.immature.survival = TRUE, 
+                                 env.sigma = 1,  #Proportion of environmental variance for immature individuals
                                  aii.vec = c(0.0005, 0.005, 0.0005), # Probability of survival of immature individuals
                                  as.msurv =  c(0.60, 0.06, 0.60), # Probability of survival of mature individuals
                                  as.matur = c(0.4, 0.02, 0.4) # Maturation rate
+                                 
                            )
 ```
 
@@ -130,19 +142,24 @@ registerDoParallel(cl)
 startparallel <- Sys.time()
 temp <- foreach(iter = 1:500)%dopar%{
 				suppressWarnings(gen.iter.f.choosy(generations = 10000, # Number of generations
-                           init.pop = 100, # Number of mature diploids in initial pop
-                           gnum.base = c(100, 100, 100), # Number of gametes per individual per cytotype
-                           d = c(0.0001, 0.0009, 0.0001), # Strength of density dependency
-                           density.type = "all", # Type of density dependence
-                           b = 0.02, # Proportion of unreduced gamete formation
-                           cc = 0.052, # Proportion of 3n gamete formation 
-                           s = 0.1, # Selfing rate
-                           mc = 0.1, # Strength of mating choice
-                           mate.lazy = FALSE, # Prevents selfing from occurring during outcrossing
-                           env.ci = 0.1, # Proportion of environmental variance
-                           aii.vec = c(0.0005, 0.005, 0.0005), # Probability of survival of immature individuals
-                           as.msurv =  c(0.60, 0.06, 0.60), # Probability of survival of mature individuals
-                           as.matur = c(0.4, 0.02, 0.4) # Maturation rate
+                                 init.pop = 100, # Number of mature diploids in initial pop
+                                 gnum.base = c(100, 100, 100), # Number of gametes per individual per cytotype
+                                 d = c(0.0001, 0.0009, 0.0001), # Strength of density dependency
+                                 gam.density.type = "all", # Type of density dependence for gamete production
+                                 b = 0.02, # Proportion of unreduced gamete formation
+                                 cc = 0.052, # Proportion of 3n gamete formation 
+                                 s = 0.1, # Selfing rate
+                                 mc = 0.1, # Strength of mating choice
+                                 mate.lazy = FALSE, # Prevents selfing from occurring during outcrossing
+                                 rho = 0, # correlation coefficient
+                                 rj = c(1,1), # stage specific density dependence on gamete production 
+                                 yj = c(1,1), # stage specific density dependence on immature surivial 
+                                 env.ci = 0.1, # Proportion of environmental variance for mature individuals
+                                 env.immature.survival = TRUE, 
+                                 env.sigma = 1,  #Proportion of environmental variance for immature individuals
+                                 aii.vec = c(0.0005, 0.005, 0.0005), # Probability of survival of immature individuals
+                                 as.msurv =  c(0.60, 0.06, 0.60), # Probability of survival of mature individuals
+                                 as.matur = c(0.4, 0.02, 0.4) # Maturation rate
                      ))
           	}
 

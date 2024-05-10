@@ -37,6 +37,9 @@
     <loc>http://mlgaynor.com/AutoPop/reference/cytotype_repro_mate.html</loc>
   </url>
   <url>
+    <loc>http://mlgaynor.com/AutoPop/reference/env.copula.html</loc>
+  </url>
+  <url>
     <loc>http://mlgaynor.com/AutoPop/reference/form.autopop.html</loc>
   </url>
   <url>
@@ -55,6 +58,12 @@
     <loc>http://mlgaynor.com/AutoPop/reference/mature.surv.calc.html</loc>
   </url>
   <url>
+    <loc>http://mlgaynor.com/AutoPop/reference/mature.surv.shape.html</loc>
+  </url>
+  <url>
+    <loc>http://mlgaynor.com/AutoPop/reference/mu.options.html</loc>
+  </url>
+  <url>
     <loc>http://mlgaynor.com/AutoPop/reference/muvar.calc.html</loc>
   </url>
   <url>
@@ -62,6 +71,9 @@
   </url>
   <url>
     <loc>http://mlgaynor.com/AutoPop/reference/stability.html</loc>
+  </url>
+  <url>
+    <loc>http://mlgaynor.com/AutoPop/reference/surv.shape.html</loc>
   </url>
   <url>
     <loc>http://mlgaynor.com/AutoPop/reference/var.option.html</loc>

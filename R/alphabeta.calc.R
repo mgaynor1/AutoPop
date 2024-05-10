@@ -1,8 +1,9 @@
 #' Mature survival - Calculates alpha and beta from mean and variance.
 #'
-#' @description Calculates the alpha and beta parameters based on mu, the mean probability of mature survival, and the calculated variance.
+#' @description Calculates the alpha and beta parameters based on mu, here the mean probability of mature survival,
+#' and s calculated variance.
 #'
-#' @param mu Mean probability of mature survival. Must be a single integer between 0 and 1.
+#' @param mu Sample mean. Must be a single integer between 0 and 1.
 #' @param var Derived variance based on var.option. Must be a single integer between 0 and 1.
 #'
 #' @returns List with the parameters alpha and beta.

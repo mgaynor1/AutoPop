@@ -8,8 +8,8 @@
 <meta name="description" content="AutoPop">
 <title>Introduction to AutoPop • AutoPop</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Introduction to AutoPop">
 <meta property="og:description" content="AutoPop">
@@ -32,7 +32,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">AutoPop</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0.0000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -185,57 +185,98 @@ definitions. Color indicates processes: reproduction (green), survival
 population.</td>
 </tr>
 <tr class="odd">
-<td align="center"><span class="math inline">\(\color{green}{gnum}\)</span></td>
+<td align="center"><span class="math inline">\(\color{green}{\lambda_{i}}\)</span></td>
 <td align="center"><span class="math inline">\(\color{green}{gnum.base}\)</span></td>
 <td align="left">Mean number of gametes per individual per
 cytotype.</td>
 </tr>
 <tr class="even">
-<td align="center"><span class="math inline">\(\color{green}{d}\)</span></td>
+<td align="center"><span class="math inline">\(\color{green}{d_{i}}\)</span></td>
 <td align="center"><span class="math inline">\(\color{green}{d}\)</span></td>
 <td align="left">Strength of density dependency on gamete production for
 each cytotype.</td>
 </tr>
 <tr class="odd">
-<td align="center"></td>
-<td align="center"><span class="math inline">\(\color{green}{density.type}\)</span></td>
-<td align="left">Sets type of density dependency utilized when defining
-number of gametes per individual. Options: “all” or
-“like-cytotype”.</td>
+<td align="center"><span class="math inline">\(\color{green}{r_{j}}\)</span></td>
+<td align="center"><span class="math inline">\(\color{green}{rj}\)</span></td>
+<td align="left">Stage-specific density dependence.</td>
 </tr>
 <tr class="even">
+<td align="center"><span class="math inline">\(\color{green}{\gamma_{i,k}}\)</span></td>
+<td align="center"><span class="math inline">\(\color{green}{gam.density.type}\)</span></td>
+<td align="left">Type-specific density dependence.Competitive effect of
+cytotype <span class="math inline">\(k\)</span> on cytotype <span class="math inline">\(i\)</span>’s reproduction. Options: “all” or
+“like-cytotype”. When equal to “all”, <span class="math inline">\(\gamma_{i,k} = 1\)</span>. Similarly, when equal
+to “like-cytotype”, <span class="math inline">\(\gamma_{i,k} =
+0\)</span>
+</td>
+</tr>
+<tr class="odd">
 <td align="center"><span class="math inline">\(\color{green}{b}\)</span></td>
 <td align="center"><span class="math inline">\(\color{green}{b}\)</span></td>
 <td align="left">Proportion of unreduced gamete formed by each diploid
 and tetraploid individual.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="center"><span class="math inline">\(\color{green}{v}\)</span></td>
 <td align="center"><span class="math inline">\(\color{green}{cc}\)</span></td>
 <td align="left">Proportion of 3n gamete formation from each triploid
 individual.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="center"><span class="math inline">\(\color{green}{s}\)</span></td>
 <td align="center"><span class="math inline">\(\color{green}{s}\)</span></td>
 <td align="left">Selfing rate.</td>
 </tr>
-<tr class="odd">
-<td align="center"><span class="math inline">\(\color{green}{mc}\)</span></td>
-<td align="center"><span class="math inline">\(\color{green}{mc}\)</span></td>
-<td align="left">Strength of mating choice.</td>
-</tr>
 <tr class="even">
+<td align="center"><span class="math inline">\(\color{green}{mp}\)</span></td>
+<td align="center"><span class="math inline">\(\color{green}{mc}\)</span></td>
+<td align="left">Strength of mating proportion.</td>
+</tr>
+<tr class="odd">
 <td align="center"></td>
 <td align="center"><span class="math inline">\(\color{green}{mate.lazy}\)</span></td>
 <td align="left">Prevents selfing from occurring during
 outcrossing.</td>
 </tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(\color{red}{\rho}\)</span></td>
+<td align="center"><span class="math inline">\(\color{red}{rho}\)</span></td>
+<td align="left">Rank correlation between surivival of different
+cytotypes.</td>
+</tr>
 <tr class="odd">
-<td align="center"><span class="math inline">\(\color{red}{a_{i,i}}\)</span></td>
+<td align="center"><span class="math inline">\(\color{red}{a_{i}}\)</span></td>
 <td align="center"><span class="math inline">\(\color{red}{aii.vec}\)</span></td>
-<td align="left">Survival probability of an immature individual for each
-cytotype.</td>
+<td align="left">Cytotype-specific response to competition related to
+immature survival.</td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(\color{red}{\alpha_{i,k}}\)</span></td>
+<td align="center"><span class="math inline">\(\color{red}{is.density.type}\)</span></td>
+<td align="left">Type-specific density dependence. Competitive effect of
+cytotype <span class="math inline">\(k\)</span> on cytotype <span class="math inline">\(i\)</span>’s survival. Options: “all” or
+“like-cytotype”. When equal to “all”, <span class="math inline">\(\alpha_{i,k} = 1\)</span>. Similarly, when equal
+to “like-cytotype”, <span class="math inline">\(\alpha_{i,k} =
+0\)</span>
+</td>
+</tr>
+<tr class="odd">
+<td align="center"><span class="math inline">\(\color{red}{y_{j}}\)</span></td>
+<td align="center"><span class="math inline">\(\color{red}{yj}\)</span></td>
+<td align="left">Stage-specific density dependence.</td>
+</tr>
+<tr class="even">
+<td align="center"></td>
+<td align="center"><span class="math inline">\(\color{red}{env.immature.survival}\)</span></td>
+<td align="left">Allows environmental stochasticity to influences
+immature survival. Defaults as “TRUE”</td>
+</tr>
+<tr class="odd">
+<td align="center"><span class="math inline">\(\color{red}{\sigma}\)</span></td>
+<td align="center"><span class="math inline">\(\color{red}{env.sigma}\)</span></td>
+<td align="left">Proportion of environmental variance for immature
+individual.</td>
 </tr>
 <tr class="even">
 <td align="center"><span class="math inline">\(\color{red}{\mu}\)</span></td>
@@ -277,16 +318,22 @@ sets, we recommend running model replicates in parallel using <a href="https://c
 <span>                                 init.pop <span class="op">=</span> <span class="fl">100</span>, <span class="co"># Number of mature diploids in initial pop</span></span>
 <span>                                 gnum.base <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">100</span>, <span class="fl">100</span><span class="op">)</span>, <span class="co"># Number of gametes per individual per cytotype</span></span>
 <span>                                 d <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.0001</span>, <span class="fl">0.0009</span>, <span class="fl">0.0001</span><span class="op">)</span>, <span class="co"># Strength of density dependency</span></span>
-<span>                                 density.type <span class="op">=</span> <span class="st">"all"</span>, <span class="co"># Type of density dependence</span></span>
+<span>                                 gam.density.type <span class="op">=</span> <span class="st">"all"</span>, <span class="co"># Type of density dependence for gamete production</span></span>
 <span>                                 b <span class="op">=</span> <span class="fl">0.02</span>, <span class="co"># Proportion of unreduced gamete formation</span></span>
 <span>                                 cc <span class="op">=</span> <span class="fl">0.052</span>, <span class="co"># Proportion of 3n gamete formation </span></span>
 <span>                                 s <span class="op">=</span> <span class="fl">0.1</span>, <span class="co"># Selfing rate</span></span>
 <span>                                 mc <span class="op">=</span> <span class="fl">0.1</span>, <span class="co"># Strength of mating choice</span></span>
 <span>                                 mate.lazy <span class="op">=</span> <span class="cn">FALSE</span>, <span class="co"># Prevents selfing from occurring during outcrossing</span></span>
-<span>                                 env.ci <span class="op">=</span> <span class="fl">0.1</span>, <span class="co"># Proportion of environmental variance</span></span>
+<span>                                 rho <span class="op">=</span> <span class="fl">0</span>, <span class="co"># correlation coefficient</span></span>
+<span>                                 rj <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>, <span class="co"># stage specific density dependence on gamete production </span></span>
+<span>                                 yj <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>, <span class="co"># stage specific density dependence on immature surivial </span></span>
+<span>                                 env.ci <span class="op">=</span> <span class="fl">0.1</span>, <span class="co"># Proportion of environmental variance for mature individuals</span></span>
+<span>                                 env.immature.survival <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>                                 env.sigma <span class="op">=</span> <span class="fl">1</span>,  <span class="co">#Proportion of environmental variance for immature individuals</span></span>
 <span>                                 aii.vec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.0005</span>, <span class="fl">0.005</span>, <span class="fl">0.0005</span><span class="op">)</span>, <span class="co"># Probability of survival of immature individuals</span></span>
 <span>                                 as.msurv <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.60</span>, <span class="fl">0.06</span>, <span class="fl">0.60</span><span class="op">)</span>, <span class="co"># Probability of survival of mature individuals</span></span>
 <span>                                 as.matur <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.4</span>, <span class="fl">0.02</span>, <span class="fl">0.4</span><span class="op">)</span> <span class="co"># Maturation rate</span></span>
+<span>                                 </span>
 <span>                           <span class="op">)</span></span></code></pre></div>
 </div>
 </div>
@@ -311,19 +358,24 @@ sets, we recommend running model replicates in parallel using <a href="https://c
 <span><span class="va">startparallel</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/foreach/man/foreach.html" class="external-link">foreach</a></span><span class="op">(</span>iter <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">500</span><span class="op">)</span><span class="op"><a href="https://rdrr.io/pkg/foreach/man/foreach.html" class="external-link">%dopar%</a></span><span class="op">{</span></span>
 <span>                <span class="fu"><a href="https://rdrr.io/r/base/warning.html" class="external-link">suppressWarnings</a></span><span class="op">(</span><span class="fu"><a href="../reference/gen.iter.f.choosy.html">gen.iter.f.choosy</a></span><span class="op">(</span>generations <span class="op">=</span> <span class="fl">10000</span>, <span class="co"># Number of generations</span></span>
-<span>                           init.pop <span class="op">=</span> <span class="fl">100</span>, <span class="co"># Number of mature diploids in initial pop</span></span>
-<span>                           gnum.base <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">100</span>, <span class="fl">100</span><span class="op">)</span>, <span class="co"># Number of gametes per individual per cytotype</span></span>
-<span>                           d <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.0001</span>, <span class="fl">0.0009</span>, <span class="fl">0.0001</span><span class="op">)</span>, <span class="co"># Strength of density dependency</span></span>
-<span>                           density.type <span class="op">=</span> <span class="st">"all"</span>, <span class="co"># Type of density dependence</span></span>
-<span>                           b <span class="op">=</span> <span class="fl">0.02</span>, <span class="co"># Proportion of unreduced gamete formation</span></span>
-<span>                           cc <span class="op">=</span> <span class="fl">0.052</span>, <span class="co"># Proportion of 3n gamete formation </span></span>
-<span>                           s <span class="op">=</span> <span class="fl">0.1</span>, <span class="co"># Selfing rate</span></span>
-<span>                           mc <span class="op">=</span> <span class="fl">0.1</span>, <span class="co"># Strength of mating choice</span></span>
-<span>                           mate.lazy <span class="op">=</span> <span class="cn">FALSE</span>, <span class="co"># Prevents selfing from occurring during outcrossing</span></span>
-<span>                           env.ci <span class="op">=</span> <span class="fl">0.1</span>, <span class="co"># Proportion of environmental variance</span></span>
-<span>                           aii.vec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.0005</span>, <span class="fl">0.005</span>, <span class="fl">0.0005</span><span class="op">)</span>, <span class="co"># Probability of survival of immature individuals</span></span>
-<span>                           as.msurv <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.60</span>, <span class="fl">0.06</span>, <span class="fl">0.60</span><span class="op">)</span>, <span class="co"># Probability of survival of mature individuals</span></span>
-<span>                           as.matur <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.4</span>, <span class="fl">0.02</span>, <span class="fl">0.4</span><span class="op">)</span> <span class="co"># Maturation rate</span></span>
+<span>                                 init.pop <span class="op">=</span> <span class="fl">100</span>, <span class="co"># Number of mature diploids in initial pop</span></span>
+<span>                                 gnum.base <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">100</span>, <span class="fl">100</span><span class="op">)</span>, <span class="co"># Number of gametes per individual per cytotype</span></span>
+<span>                                 d <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.0001</span>, <span class="fl">0.0009</span>, <span class="fl">0.0001</span><span class="op">)</span>, <span class="co"># Strength of density dependency</span></span>
+<span>                                 gam.density.type <span class="op">=</span> <span class="st">"all"</span>, <span class="co"># Type of density dependence for gamete production</span></span>
+<span>                                 b <span class="op">=</span> <span class="fl">0.02</span>, <span class="co"># Proportion of unreduced gamete formation</span></span>
+<span>                                 cc <span class="op">=</span> <span class="fl">0.052</span>, <span class="co"># Proportion of 3n gamete formation </span></span>
+<span>                                 s <span class="op">=</span> <span class="fl">0.1</span>, <span class="co"># Selfing rate</span></span>
+<span>                                 mc <span class="op">=</span> <span class="fl">0.1</span>, <span class="co"># Strength of mating choice</span></span>
+<span>                                 mate.lazy <span class="op">=</span> <span class="cn">FALSE</span>, <span class="co"># Prevents selfing from occurring during outcrossing</span></span>
+<span>                                 rho <span class="op">=</span> <span class="fl">0</span>, <span class="co"># correlation coefficient</span></span>
+<span>                                 rj <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>, <span class="co"># stage specific density dependence on gamete production </span></span>
+<span>                                 yj <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>, <span class="co"># stage specific density dependence on immature surivial </span></span>
+<span>                                 env.ci <span class="op">=</span> <span class="fl">0.1</span>, <span class="co"># Proportion of environmental variance for mature individuals</span></span>
+<span>                                 env.immature.survival <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>                                 env.sigma <span class="op">=</span> <span class="fl">1</span>,  <span class="co">#Proportion of environmental variance for immature individuals</span></span>
+<span>                                 aii.vec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.0005</span>, <span class="fl">0.005</span>, <span class="fl">0.0005</span><span class="op">)</span>, <span class="co"># Probability of survival of immature individuals</span></span>
+<span>                                 as.msurv <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.60</span>, <span class="fl">0.06</span>, <span class="fl">0.60</span><span class="op">)</span>, <span class="co"># Probability of survival of mature individuals</span></span>
+<span>                                 as.matur <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.4</span>, <span class="fl">0.02</span>, <span class="fl">0.4</span><span class="op">)</span> <span class="co"># Maturation rate</span></span>
 <span>                     <span class="op">)</span><span class="op">)</span></span>
 <span>            <span class="op">}</span></span>
 <span></span>

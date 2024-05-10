@@ -4,7 +4,7 @@ this function is a single time step in a stochastic stage-structured
 matrix population dynamics model for diploid, triploid, and autotetraploid
 perennial plants with two life-stages (reproductively immature and reproductively mature).
 Population composition at time t + 1 is defined by reproduction,
-survival, and maturation. Note, lists of three should always have values representing c(diploids, triploid, autotetraploids)."><title>Simulate a single generation. — one.iter.f.choosy • AutoPop</title><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Simulate a single generation. — one.iter.f.choosy"><meta property="og:description" content="Defined in detail in Gaynor et al. 2023. To summarize,
+survival, and maturation. Note, lists of three should always have values representing c(diploids, triploid, autotetraploids)."><title>Simulate a single generation. — one.iter.f.choosy • AutoPop</title><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Simulate a single generation. — one.iter.f.choosy"><meta property="og:description" content="Defined in detail in Gaynor et al. 2023. To summarize,
 this function is a single time step in a stochastic stage-structured
 matrix population dynamics model for diploid, triploid, and autotetraploid
 perennial plants with two life-stages (reproductively immature and reproductively mature).
@@ -26,7 +26,7 @@ survival, and maturation. Note, lists of three should always have values represe
     
     <a class="navbar-brand me-2" href="../index.html">AutoPop</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0.0000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -83,8 +83,14 @@ survival, and maturation. Note, lists of three should always have values represe
 <span>  <span class="va">b</span>,</span>
 <span>  <span class="va">cc</span>,</span>
 <span>  <span class="va">mc</span>,</span>
-<span>  density.type <span class="op">=</span> <span class="st">"all"</span>,</span>
-<span>  mate.lazy <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  <span class="va">gam.density.type</span>,</span>
+<span>  <span class="va">is.density.type</span>,</span>
+<span>  mate.lazy <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  rj <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>,</span>
+<span>  yj <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>,</span>
+<span>  <span class="va">env.sigma</span>,</span>
+<span>  <span class="va">Xi.is</span>,</span>
+<span>  <span class="va">env.immature.survival</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -96,15 +102,16 @@ Indicates the sum of each type at time t, <code>ct.vec = c(2x_immature, 3x_immat
 
 
 <dt>aii.vec</dt>
-<dd><p>The survival probability of an immature individual for each cytotype. Must be a list of three integers between 0 and 1. For example, <code>aii.vec = c(0.5, 0.3, 0.5)</code>.</p></dd>
+<dd><p>The survival probability of an immature individual for each cytotype. Must be a list of three integers between 0 and 1. For example, <code>aii.vec = c(0.0005, 0.005, 0.0005)</code>.</p></dd>
 
 
 <dt>as.matur</dt>
-<dd><p>The probability of maturation from an immature stage to the mature stage for each cytotype. Must be a list of three integers between 0 and 1. For example, <code>as.matur = c(0.5, 0.3, 0.5)</code>.</p></dd>
+<dd><p>The probability of maturation from an immature stage to the mature stage for each cytotype. Must be a list of three integers between 0 and 1. For example, <code>as.matur = c(0.60, 0.06, 0.60)</code>.</p></dd>
 
 
 <dt>as.msurv.e.set</dt>
-<dd><p>The survival probability of a mature individual for each cytotype. Must be a list of three integers between 0 and 1. For example, <code>as.msurv.e.set = c(0.5, 0.3, 0.5)</code>.
+<dd><p>The survival probability of a mature individual for each cytotype. Must be a list of three integers between 0 and 1. These are defined based on user supplied
+mean probability of mature survival (<code>as.msurv</code>), proportion of environmental variance (<code>env.ci</code>),
 This list is defined within the <code><a href="gen.iter.f.choosy.html">gen.iter.f.choosy()</a></code> function.</p></dd>
 
 
@@ -134,8 +141,14 @@ Must be a single integer between 0 and 1.</p></dd>
 <dd><p>Strength of mating choice. Must be a single integer between 0 and 1.</p></dd>
 
 
-<dt>density.type</dt>
-<dd><p>Default = "all", this sets the density at time t as all individuals at time t.
+<dt>gam.density.type</dt>
+<dd><p>Default = "all", this sets the density dependence type for number of gametes produced at time t as all individuals at time t.
+Alternatively, "like-cytotype" sets the density at time t for each cytotype based on only the total immature and mature individuals
+of that cytotype at time t.</p></dd>
+
+
+<dt>is.density.type</dt>
+<dd><p>Default = "all", this sets the density dependence type for immature surivival at time t as all individuals at time t.
 Alternatively, "like-cytotype" sets the density at time t for each cytotype based on only the total immature and mature individuals
 of that cytotype at time t.</p></dd>
 
@@ -143,14 +156,40 @@ of that cytotype at time t.</p></dd>
 <dt>mate.lazy</dt>
 <dd><p>Default = FALSE, this prevents selfing from occurring during outcrossing. However, this increases the computational time by 31x!</p></dd>
 
+
+<dt>rj</dt>
+<dd><p>List of two indicates the stage dependent density dependent impact of immature and mature individuals on  number of gametes produced. Default is c(1,1).</p></dd>
+
+
+<dt>yj</dt>
+<dd><p>List of two indicates the stage dependent density dependent impact of immature and mature individuals on the probability of immature survival. Default is c(1,1).</p></dd>
+
+
+<dt>env.sigma</dt>
+<dd><p>Sigma value to define environmental variance corresponding to immature survival rate per generation.</p></dd>
+
+
+<dt>Xi.is</dt>
+<dd><p>Sample from a multivariate normal distribution. Allows immature and mature survival probabilities be correlated,
+as well as allowing for a correlation among cytotypes based on a supplied <code>rho</code> value.</p></dd>
+
+
+<dt>env.immature.survival</dt>
+<dd><p>Default = FALSE. When FALSE, the mean immature survival rate is equal to the exponential of the inverse
+immature survival rate (<code>aii</code>) times the sum of immature individuals and mature individuals of the cytotype indicated by <code>is.density.type</code>,
+which may be modified by <code>yj</code>. When this variable equals TRUE, the previous mean, or the immature determinate survival rate, is transformed
+by log(mu/(1-mu)) and the Johnson SB distribution is sampled given the <code>env.sigma</code> and <code>Xi.is</code> (defined in <code><a href="gen.iter.f.choosy.html">gen.iter.f.choosy()</a></code>).</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>List of 9, with 1:6 representing the number of individuals of each cytotype
-and at both stages at time t + 1. Items 7:9 are the number of gametes sampled for
-2x, 3x, and 4x individuals at time t.</p>
+<p>List of 15, with 1:6 representing the number of individuals of each cytotype
+and at both stages at time t + 1. Items 7:9 are the number of offspring generated for
+2x, 3x, and 4x individuals at time t. Items 10:12 are the number of gametes generated from
+2x, 3x, and 4x individuals at time t. Items 12:15 are the immature survival probabilities
+at time t.</p>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

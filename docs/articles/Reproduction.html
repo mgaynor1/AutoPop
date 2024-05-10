@@ -8,8 +8,8 @@
 <meta name="description" content="AutoPop">
 <title>Reproduction • AutoPop</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Reproduction">
 <meta property="og:description" content="AutoPop">
@@ -32,7 +32,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">AutoPop</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0.0000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -107,41 +107,49 @@ reproduction.</p>
 cytotype.</td>
 </tr>
 <tr class="even">
-<td align="center"><span class="math inline">\(\color{green}{d}\)</span></td>
+<td align="center"><span class="math inline">\(\color{green}{d_{i}}\)</span></td>
 <td align="center"><span class="math inline">\(\color{green}{d}\)</span></td>
 <td align="left">Strength of density dependency on gamete production for
 each cytotype.</td>
 </tr>
 <tr class="odd">
-<td align="center"></td>
-<td align="center"><span class="math inline">\(\color{green}{density.type}\)</span></td>
-<td align="left">Sets type of density dependency utilized when defining
-number of gametes per individual. Options: “all” or
-“like-cytotype”.</td>
+<td align="center"><span class="math inline">\(\color{green}{r_{j}}\)</span></td>
+<td align="center"><span class="math inline">\(\color{green}{rj}\)</span></td>
+<td align="left">Stage-specific density dependence.</td>
 </tr>
 <tr class="even">
+<td align="center"><span class="math inline">\(\color{green}{\gamma_{i,k}}\)</span></td>
+<td align="center"><span class="math inline">\(\color{green}{gam.density.type}\)</span></td>
+<td align="left">Type-specific density dependence.Competitive effect of
+cytotype <span class="math inline">\(k\)</span> on cytotype <span class="math inline">\(i\)</span>’s reproduction. Options: “all” or
+“like-cytotype”. When equal to “all”, <span class="math inline">\(\gamma_{i,k} = 1\)</span>. Similarly, when equal
+to “like-cytotype”, <span class="math inline">\(\gamma_{i,k} =
+0\)</span>
+</td>
+</tr>
+<tr class="odd">
 <td align="center"><span class="math inline">\(\color{green}{b}\)</span></td>
 <td align="center"><span class="math inline">\(\color{green}{b}\)</span></td>
 <td align="left">Proportion of unreduced gamete formed by each diploid
 and tetraploid individual.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="center"><span class="math inline">\(\color{green}{v}\)</span></td>
 <td align="center"><span class="math inline">\(\color{green}{cc}\)</span></td>
 <td align="left">Proportion of 3n gamete formation from each triploid
 individual.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="center"><span class="math inline">\(\color{green}{s}\)</span></td>
 <td align="center"><span class="math inline">\(\color{green}{s}\)</span></td>
 <td align="left">Selfing rate.</td>
 </tr>
-<tr class="odd">
-<td align="center"><span class="math inline">\(\color{green}{mc}\)</span></td>
-<td align="center"><span class="math inline">\(\color{green}{mc}\)</span></td>
-<td align="left">Strength of mating choice.</td>
-</tr>
 <tr class="even">
+<td align="center"><span class="math inline">\(\color{green}{mp}\)</span></td>
+<td align="center"><span class="math inline">\(\color{green}{mc}\)</span></td>
+<td align="left">Strength of mating proportion.</td>
+</tr>
+<tr class="odd">
 <td align="center"></td>
 <td align="center"><span class="math inline">\(\color{green}{mate.lazy}\)</span></td>
 <td align="left">Prevents selfing from occurring during
@@ -157,25 +165,33 @@ outcrossing.</td>
 </h3>
 <p>The number of gametes per individual of each cytotype at each time
 step (<span class="math inline">\(X_{i}(t)\)</span>) is determined based
-on the base number of gametes per individual (<span class="math inline">\(gnum.base\)</span>) and the strength of density
+on the base number of gametes per individual (<span class="math inline">\(gnum.base\)</span> or <span class="math inline">\(\lambda\)</span>) and the strength of density
 dependency (<span class="math inline">\(d\)</span>).</p>
-<p><span class="math display">\[X_{i}(t) \sim {\rm Poisson}
-\left(gnum*\exp\left\{-d_{i}\sum_{i=2}^4\sum_{j=1}^{2}c_{i,j}(t)\right\}
-\right)\]</span></p>
-<p>where <span class="math inline">\(c_{i,j}\)</span> indicates the
-total number of individuals of each cytotype (i = {2, 3, 4}) and each
-life stage (j = {1,2}).</p>
+<p>When all cytotypes impact the number of gametes produced, this is
+defined as <span class="math display">\[X_{i}(t) \sim {\rm Poisson}
+\left(\lambda_{i}\exp\left\{-d_{i}\sum_{j=1}^{2}\sum_{k=2}^{4}r_{j}
+\gamma_{i,k}c_{k,j}(t)\right\} \right)\]</span></p>
+<p>where <span class="math inline">\(c_{k,j}\)</span> indicates the
+total number of individuals of each cytotype (k = {2, 3, 4}) and each
+life stage (j = {1,2}). Here, <span class="math inline">\(r_{j}\)</span>
+is the stage-specific density dependence. <span class="math inline">\(\gamma_{i,k}\)</span> is the type-specific density
+dependence effect or the competitive effect of cytotype <span class="math inline">\(k\)</span> on cytotype <span class="math inline">\(i\)</span>’s reproduction. In our code, this value
+is set by <span class="math inline">\(gam.density.type\)</span> equal to
+“all” or “like-cytotype”. When equal to “all”, <span class="math inline">\(\gamma_{i,k} = 1\)</span>. Similarly, when equal
+to “like-cytotype”, <span class="math inline">\(\gamma_{i,k} =
+0\)</span>. Here we do not explore values for <span class="math inline">\(r_{j}\)</span> or <span class="math inline">\(\gamma_{i,k}\)</span>.</p>
 <p>Here we inspect the number of gametes expected for populations
-between 10 to 100,000 individuals. We see that minimum population size
-where 0 gametes are sampled (indicated by colored lines) among the
-different <span class="math inline">\(gnum.base\)</span> values
-decreases with increased <span class="math inline">\(d\)</span> values.
-We also observe that at larger values of <span class="math inline">\(d\)</span> there is a decrease in distance among
-the minimum population size with 0 gametes sampled for the different
-<span class="math inline">\(gnum.base\)</span> values. Due to the
-dynamics revealed in <strong>Figure 1</strong>, we decided to vary the
-strength of density dependence, rather than the base number of gametes
-produced (see <strong>Figure 2</strong>).</p>
+between 10 to 100,000 individuals, where density dependence is based on
+total population abundance. We see that minimum population size where 0
+gametes are sampled (indicated by colored lines) among the different
+<span class="math inline">\(gnum.base\)</span> values decreases with
+increased <span class="math inline">\(d\)</span> values. We also observe
+that at larger values of <span class="math inline">\(d\)</span> there is
+a decrease in distance among the minimum population size with 0 gametes
+sampled for the different <span class="math inline">\(gnum.base\)</span>
+values. Due to the dynamics revealed in <strong>Figure 1</strong>, we
+decided to vary the strength of density dependence, rather than the base
+number of gametes produced (see <strong>Figure 2</strong>).</p>
 <p><br></p>
 <p><img src="Reproduction_files/figure-html/unnamed-chunk-1-1.png" width="768" style="display: block; margin: auto;"><strong>Figure 1</strong>: Expected number of gametes sampled for d
 values (A - E) with color indicating gnum.base (or number of gametes
