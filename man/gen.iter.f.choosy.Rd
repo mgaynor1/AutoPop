@@ -117,7 +117,7 @@ A single data frame as defined by \code{form.autopop()}. Each row is a generatio
 }
 }
 \description{
-Defined in detail in \url{Gaynor et al. 2023}. To summarize,
+Defined in detail in \href{https://doi.org/10.1086/734411}{Gaynor et al. 2025}. To summarize,
 this function simulates a stochastic stage-structured
 matrix population dynamics model for diploid, triploid, and autotetraploid
 perennial plants with overlapping generations and two life-stages (reproductively immature and reproductively mature).

@@ -17,7 +17,7 @@ library(knitr)
 
 
 ## Summary
-AutoPop is an R-based joint-dynamic population simulation for diploids, triploids, and autotetraploids. For details on these methods, see [Gaynor et al. 2023](https://doi.org/10.1101/2023.03.29.534764). To summarize, this package contains a stochastic stage-structured matrix population dynamics model for diploid, triploid, and autotetraploid perennial plants with overlapping generations. Specifically, this model includes three cytotypes (diploids, triploids, and autotetraploids), as well as two life stages, in regards to reproductive ability (immature and mature), for a total of six stages each represented by $c_{i,j}$ where i = \{2, 3, 4\} and j = \{1,2\}.
+AutoPop is an R-based joint-dynamic population simulation for diploids, triploids, and autotetraploids. For details on these methods, see [Gaynor et al. 2025](https://doi.org/10.1086/734411). To summarize, this package contains a stochastic stage-structured matrix population dynamics model for diploid, triploid, and autotetraploid perennial plants with overlapping generations. Specifically, this model includes three cytotypes (diploids, triploids, and autotetraploids), as well as two life stages, in regards to reproductive ability (immature and mature), for a total of six stages each represented by $c_{i,j}$ where i = \{2, 3, 4\} and j = \{1,2\}.
 
 Each time step includes three processes: 
 

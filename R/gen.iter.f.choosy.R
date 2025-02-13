@@ -1,6 +1,6 @@
 #' Simulate multiple generations.
 #'
-#' @description Defined in detail in [Gaynor et al. 2023](). To summarize,
+#' @description Defined in detail in [Gaynor et al. 2025](https://doi.org/10.1086/734411). To summarize,
 #'   this function simulates a stochastic stage-structured
 #'   matrix population dynamics model for diploid, triploid, and autotetraploid
 #'   perennial plants with overlapping generations and two life-stages (reproductively immature and reproductively mature).

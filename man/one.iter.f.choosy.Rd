@@ -83,7 +83,7 @@ and at both stages at time t + 1. Items 7:9 are the number of offspring generate
 at time t.
 }
 \description{
-Defined in detail in \url{Gaynor et al. 2023}. To summarize,
+Defined in detail in \href{https://doi.org/10.1086/734411}{Gaynor et al. 2025}. To summarize,
 this function is a single time step in a stochastic stage-structured
 matrix population dynamics model for diploid, triploid, and autotetraploid
 perennial plants with two life-stages (reproductively immature and reproductively mature).
